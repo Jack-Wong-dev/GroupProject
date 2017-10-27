@@ -1,6 +1,6 @@
 # Design Discussion
 
-! [Diagram 1]("design-team.pdf")
+! [Diagram 1](/design-team.pdf)
 
 ### Pros & Cons Individual Designs 
 
