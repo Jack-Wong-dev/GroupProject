@@ -1,6 +1,8 @@
 # Design Discussion
 
-! [Diagram 1](/design-team.pdf)
+<p align="center">
+  <img src="design-team.pdf" width="350"/>
+</p>
 
 ### Pros & Cons Individual Designs 
 
