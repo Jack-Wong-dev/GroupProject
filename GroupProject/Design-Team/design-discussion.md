@@ -1,5 +1,6 @@
 # Design Discussion
 
+![alt text](design-team.pdf)
 
 ### Pros & Cons Individual Designs 
 
