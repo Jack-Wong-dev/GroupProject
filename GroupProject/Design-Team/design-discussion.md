@@ -8,6 +8,8 @@
 
 Design 1(Jack): 
 
+![Jack's Design](Jack-Design.png)
+
 Pros: 
 One of the main pros of Design 1 was that it came up with the idea of having ItemType as its own class; this class was related to Item. In this way it accounted for requirement three by having type specified as a first level. 
 
@@ -15,6 +17,9 @@ Cons:
 Possibly the inclusion of the attribute of ItemPrice, as the user might be going to different stores for their shopping list, as well as the possibility of the price at one particular store changing at some point. 
 
 Design 2 (Don):
+
+![Don's Design](Don-Design.png)
+
 Pros: 
 The diagram groups methods succinctly.
 
@@ -23,6 +28,9 @@ This diagram doesn’t account for some attributes necessary to methods, such as
 
 
 Design 3 (Lin):
+
+![Lin's Design](Lin-Design.png)
+
 Pros: 
 The diagram is detailed, and accounts for the parameters that would be passed into methods such as ItemID for the addItem method. 
 
@@ -30,6 +38,9 @@ Cons:
 Possibly how the Hierarchical List Class was established, only in that the List class does not interact with the Hierarchical List Class directly. 
 
 Design 4(Jessica): 
+
+![Jessica's Design](Jess-Design.png)
+
 Pros: 
 The diagram lists an addtoDB method for the user to develop their database. 
 
