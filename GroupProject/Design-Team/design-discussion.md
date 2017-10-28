@@ -1,7 +1,7 @@
 # Design Discussion
 
 <p align="center">
-  <img src="design-team.png" width="350"/>
+  <img src="design-team.png"/>
 </p>
 
 ### Pros & Cons Individual Designs 
