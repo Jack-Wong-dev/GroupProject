@@ -1,6 +1,6 @@
 # Use Case Model 
 
-**Author**: \<Jessica Thomas\>
+**Author**: Jessica Thomas
 
 ## 1 Use Case Diagram
 
