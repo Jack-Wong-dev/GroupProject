@@ -62,7 +62,7 @@ The system we are building is a Grocery List Manager, to make grocery lists.
 
 <!-- ![Roles](Roles.png) -->
 <p align="center">
-  <img src="/Roles.png"/>
+  <img src="Roles.pdf"/>
 </p>
 
 
