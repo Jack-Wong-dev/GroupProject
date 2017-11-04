@@ -65,4 +65,5 @@ The system we are building is a Grocery List Manager, To make grocery lists.
 
 *Describe the team and their roles (there may be more roles than there are team members)*
 
-<img src="Roles.pdf">
+![Image](Roles.pdf)
+
