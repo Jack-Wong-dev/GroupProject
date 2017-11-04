@@ -1,6 +1,6 @@
 # Design Document
 
-**Author**: <Team 5> 
+**Author**: Team 5
 
 ## 1 Design Considerations
 
@@ -28,7 +28,21 @@ As stated above, the system must be able to operate on phones that are at least 
 
 ### 2.1 Component Diagram
 
-*This section should provide and describe a diagram that shows the various components and how they are connected. This diagram shows the logical/functional components of the system, where each component represents a cluster of related functionality. In the case of simple systems, where there is a single component, this diagram may be unnecessary; in these cases, simply state so and concisely state why.*
+![Component Diagram](componentDiagram.png)
+
+This diagram depicts the relationship between the components of the Grocery Manager List
+
+The user component has access to the interface of the listClass component by having the ability to create lists
+
+The user component also has access to the interface of the database component by means of adding items to the database when they do not exist.
+
+The list class has access to the database so that it can add items to the list
+
+The list class also has access to the itemType component so the user can browse for items by type
+
+The itemType component has access to the itemNode component so it can offer the user items sorted by types
+
+The database component has access to the itemNode component so it can create the items. 
 
 ### 2.2 Deployment Diagram
 
