@@ -61,9 +61,7 @@ The system we are building is a Grocery List Manager, To make grocery lists.
 	- input will be a seleced type
 	- output will be all the items within a selected type
 
-## 3 Team
-
-*Describe the team and their roles (there may be more roles than there are team members)*
+## Team 5
 
 ![Roles](Roles.pdf)
 
