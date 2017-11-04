@@ -34,7 +34,7 @@ As stated above, the system must be able to operate on phones that are at least 
 
 *This section should describe how the different components will be deployed on actual hardware devices. Similar to the previous subsection, this diagram may be unnecessary for simple systems; in these cases, simply state so and concisely state why.*
 
-### 3 Low-Level Diagram
+## 3 Low-Level Diagram
 
 *Describe the low-level design for each of the system components identified in the previous section. For each component, you should provide the details in the following UML diagrams to show its internal structure.*
 
