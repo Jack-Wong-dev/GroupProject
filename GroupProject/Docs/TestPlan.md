@@ -1,7 +1,5 @@
 # Test Plan
 
-*This is the template for your test plan. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
-
 Author: Don Liu
 
 ## 1 Testing Strategy
@@ -52,10 +50,10 @@ Selenium should be used for functional  tests.
 
 ## 2 Test Cases
 
-| Test                    | Are                     | Cool            |
-| -------------           |:-------------:          | -----:          |
-| col 3 is                | right-aligned           | $1600           |
-| col 2 is                | centered                |   $12           |
-| zebra stripes           | are neat                |    $1           |
+| Test cases                  | Purpose                     | Steps            | Expected Result | Actual Result|
+| -------------           |:-------------:          | :-----:          |:---:|-----|
+| col 3 is                | right-aligned           | $1600           |||
+| col 2 is                | centered                |   $12           |||
+| zebra stripes           | are neat                |    $1           |||
 
 *This section should be the core of this document. You should provide a table of test cases, one per row. For each test case, the table should provide its purpose, the steps necessary to perform the test, the expected result, the actual result (to be filled later), pass/fail information (to be filled later), and any additional information you think is relevant.*
