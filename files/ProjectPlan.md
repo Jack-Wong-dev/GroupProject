@@ -65,8 +65,5 @@ The system we are building is a Grocery List Manager, To make grocery lists.
 
 *Describe the team and their roles (there may be more roles than there are team members)*
 
-<object data="Roles.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="Roles.pdf">
-        This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
+<embed src="Roles.pdf" width="500" height="375" type='application/pdf'>
+
