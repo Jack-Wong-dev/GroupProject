@@ -1,11 +1,11 @@
 # Project Plan
 
 
-**Author**: \<Team 5 Jessica Don Jack Lin\>
+**Author**: Jessica Don Jack Lin
 
 ## 1 Introduction
 
-The system we are building is a Grocery List Manager, To make grocery lists.
+The system we are building is a Grocery List Manager, to make grocery lists.
 
 ## 2 Process Description
 
