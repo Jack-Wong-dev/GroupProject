@@ -1,6 +1,5 @@
 # Project Plan
 
-*This is the template for your project plan. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
 
 **Author**: \<Team 5 Jessica Don Jack Lin\>
 
@@ -9,8 +8,6 @@
 The system we are building is a Grocery List Manager, To make grocery lists.
 
 ## 2 Process Description
-
-*Process description as a set of activities; for each activity, provide the following:*
 
 - create list
 	- user makes list for items to be added to
