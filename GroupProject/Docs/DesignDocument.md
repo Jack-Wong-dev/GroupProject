@@ -48,7 +48,7 @@ A diagram displaying where the components would be deployed is unreasonable beca
 
 ### 3.1 Class Diagram
 
-![Design-Team](/Design-Team/design-team.png)
+![Design-Team](design-team.png)
 
 
 ## 4 User Interface Diagram

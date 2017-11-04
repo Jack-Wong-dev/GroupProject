@@ -60,16 +60,4 @@ The system we are building is a Grocery List Manager, to make grocery lists.
 
 ## Team 5
 
-![Roles](Roles.png)
-<!-- <p align="center">
-  <img src="Roles.pdf"/>
-</p>
- -->
-
-<!-- <object data="/Roles.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="/Roles.pdf">
-        This browser does not support PDFs. Please download the PDF to view it: <a href="Roles.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
- -->
-
+![Roles](roles.png)
