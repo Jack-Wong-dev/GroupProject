@@ -60,11 +60,11 @@ The system we are building is a Grocery List Manager, to make grocery lists.
 
 ## Team 5
 
-<!-- ![Roles](Roles.png) -->
-<p align="center">
+![Roles](Roles.pdf)
+<!-- <p align="center">
   <img src="Roles.pdf"/>
 </p>
-
+ -->
 
 <!-- <object data="/Roles.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="/Roles.pdf">
