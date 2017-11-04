@@ -60,7 +60,7 @@ The system we are building is a Grocery List Manager, to make grocery lists.
 
 ## Team 5
 
-![Roles](Roles.pdf)
+![Roles](Roles.png)
 <!-- <p align="center">
   <img src="Roles.pdf"/>
 </p>
