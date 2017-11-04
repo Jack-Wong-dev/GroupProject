@@ -4,9 +4,6 @@
 
 ## 1 Use Case Diagram
 
-<object data="UseCaseDiagram.pdf" type="application/pdf" width="800px" height="1000px">
-<a href="UseCaseDiagram.pdf">UseCaseDiagram.pdf</a></object>
-
 ![Use Case Diagram](UseCaseDiagram.png)
 
 ## 2 Use Case Descriptions
