@@ -44,7 +44,6 @@ A diagram displaying where the components would be deployed is unreasonable beca
 
 ## 3 Low-Level Diagram
 
-*Describe the low-level design for each of the system components identified in the previous section. For each component, you should provide the details in the following UML diagrams to show its internal structure.*
 
 ### 3.1 Class Diagram
 
@@ -52,7 +51,7 @@ A diagram displaying where the components would be deployed is unreasonable beca
 
 
 ## 4 User Interface Diagram
-*For GUI-based systems, this section should provide the specific format/layout of the user interface of the system (e.g., in the form of graphical mockups).*
+
 
 ![Start Screen](Mockup-User-Default.png) ![User Options](Mockup-User-Options.png) 
 ![Grocery List](Mockup-GroceryList-State1.png) ![Select Item Type](Mockup-GroceryList-State2.png)
