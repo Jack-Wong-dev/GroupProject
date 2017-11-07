@@ -27,7 +27,7 @@ As stated above, the system must be able to operate on phones that are at least 
 
 ### 2.1 Component Diagram
 
-![Component Diagram](componentDiagram.png)
+![Component Diagram](images/componentDiagram.png)
 
 #### Relationships between components
 	- This diagram depicts the relationship between the components of the Grocery Manager List
@@ -47,11 +47,11 @@ A diagram displaying where the components would be deployed is unreasonable beca
 
 ### 3.1 Class Diagram
 
-![Design-Team](design-team.png)
+![Design-Team](images/design-team.png)
 
 
 ## 4 User Interface Diagram
 
 
-![Start Screen](Mockup-User-Default.png) ![User Options](Mockup-User-Options.png) 
-![Grocery List](Mockup-GroceryList-State1.png) ![Select Item Type](Mockup-GroceryList-State2.png)
+![Start Screen](images/Mockup-User-Default.png) ![User Options](images/Mockup-User-Options.png) 
+![Grocery List](images/Mockup-GroceryList-State1.png) ![Select Item Type](images/Mockup-GroceryList-State2.png)
