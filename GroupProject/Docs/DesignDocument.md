@@ -55,3 +55,5 @@ A diagram displaying where the components would be deployed is unreasonable beca
 
 ![Start Screen](images/Mockup-User-Default.png) ![User Options](images/Mockup-User-Options.png) 
 ![Grocery List](images/Mockup-GroceryList-State1.png) ![Select Item Type](images/Mockup-GroceryList-State2.png)
+
+[Video Link](https://drive.google.com/open?id=1Rt0HN0oYy50u2Q0CKvZqydzziEVmp4v-)
