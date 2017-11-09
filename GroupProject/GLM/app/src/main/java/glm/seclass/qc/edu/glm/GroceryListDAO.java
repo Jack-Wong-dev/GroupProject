@@ -14,23 +14,24 @@ import java.util.*;
 @Dao
 public interface GroceryListDAO {
 
-    @Query("SELECT DISTINCT listName FROM groceryLists")
+    @Query("SELECT DISTINCT listName FROM groceryListsTable")
     List<String> getAllLists();
 
-    @Query("SELECT * FROM groceryLists WHERE listName LIKE :listName")
-    List<item> getSelectedList(String listName);
+    @Query("SELECT * FROM groceryListsTable WHERE listName LIKE :listName")
+    List<itemTable> getSelectedList(String listName);
 
+    
 
-//    @Query("SELECT * FROM item WHERE name LIKE :name LIMIT 1")
-//    item findByName(String name);
+//    @Query("SELECT * FROM itemTable WHERE name LIKE :name LIMIT 1")
+//    itemTable findByName(String name);
 
     @Insert
-    void insertAll(List<item> items);
+    void insertAll(List<itemTable> items);
 
     @Update
-    void update(item item);
+    void update(itemTable item);
 
     @Delete
-    void delete(item item);
+    void delete(itemTable item);
 
 }
