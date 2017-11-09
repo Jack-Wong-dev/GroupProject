@@ -20,8 +20,8 @@ public interface GroceryListDAO {
     @Query("SELECT * FROM groceryLists WHERE listName LIKE :listName")
     List<item> getSelectedList(String listName);
 
-//    @Query("SELECT * FROM item WHERE name LIKE :name LIMIT 1")
-//    item findByName(String name);
+    @Query("SELECT itemName FROM item WHERE itemName LIKE %:itemName%")
+    List<item> searchItem(String name);
 
     @Insert
     void insertAll(List<item> items);
