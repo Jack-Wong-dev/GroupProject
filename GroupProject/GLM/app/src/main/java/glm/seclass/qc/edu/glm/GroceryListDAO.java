@@ -23,6 +23,8 @@ public interface GroceryListDAO {
     @Query("SELECT itemName FROM item WHERE itemName LIKE %:itemName%")
     List<item> searchItem(String name);
 
+    @Query("SELECT itemName FROM item WHERE typeName IS :typeName")
+    List<item> getAllItemsOfType(String typeName);
     @Insert
     void insertAll(List<item> items);
 

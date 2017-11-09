@@ -13,10 +13,10 @@ public class item {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
-    @ColumnInfo(name = "item_name")
+    @ColumnInfo(name = "itemName")
     private String itemName;
 
-    @ColumnInfo(name = "type_name")
+    @ColumnInfo(name = "typeName")
     private String typeName;
 
     // getters and setters
