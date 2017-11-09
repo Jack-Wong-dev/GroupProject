@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         newitem.setItemName("Cheerios");
         newitem.setTypeName("Cereal");
         App.get().getDB().groceryListDAO().insertAll(list);
-
     }
 }
 
