@@ -9,11 +9,23 @@ import android.arch.persistence.room.ColumnInfo;
 
 public class groceryLists {
 
-    @ColumnInfo(name = "name")
-    private String name;
+    @PrimaryKey(autoGenerate = true)
+    private int listID;
 
-    @ColumnInfo(name = "image_url")
-    private String imageUrl;
+    @ColumnInfo(name = "checkMark")
+    private boolean checkMark;
+
+    @ColumnInfo(name = "listName")
+    private String listName;
+
+    @ColumnInfo(name = "itemName")
+    private String itemName;
+
+    @ColumnInfo(name = "quantity")
+    private  int quantity;
+
+    @ColumnInfo(name = "itemType")
+    private String itemType;
 
     // getters and setters
 }

@@ -14,11 +14,15 @@ import java.util.*;
 @Dao
 public interface GroceryListDAO {
 
-    @Query("SELECT * FROM item")
-    List<item> getAll();
+    @Query("SELECT DISTINCT listName FROM groceryLists")
+    List<String> getAllLists();
 
-    @Query("SELECT * FROM item WHERE name LIKE :name LIMIT 1")
-    item findByName(String name);
+    @Query("SELECT * FROM groceryLists WHERE listName LIKE :listName")
+    List<item> getSelectedList(String listName);
+
+
+//    @Query("SELECT * FROM item WHERE name LIKE :name LIMIT 1")
+//    item findByName(String name);
 
     @Insert
     void insertAll(List<item> items);
