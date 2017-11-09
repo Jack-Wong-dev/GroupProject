@@ -23,6 +23,9 @@ public interface GroceryListDAO {
     @Query("SELECT itemName FROM item WHERE itemName LIKE %:itemName%")
     List<item> searchItem(String name);
 
+    @Query("SELECT DISTINCT typeName FROM item")
+    List<String> getAllTypes();
+
     @Insert
     void insertAll(List<item> items);
 

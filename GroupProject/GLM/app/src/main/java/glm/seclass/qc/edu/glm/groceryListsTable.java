@@ -28,9 +28,6 @@ public class groceryListsTable {
     @ColumnInfo(name = "itemType")
     private String itemType;
 
-    @ColumnInfo(name = "type")
-    private String type;
-
 
 
     // getters and setters
