@@ -18,24 +18,24 @@ public interface GroceryListDAO {
     List<String> getAllLists();
 
     @Query("SELECT * FROM groceryLists WHERE listName LIKE :listName")
-    List<item> getSelectedList(String listName);
+    List<Item> getSelectedList(String listName);
 
-    @Query("SELECT itemName FROM item WHERE itemName LIKE %:itemName%")
-    List<item> searchItem(String name);
+    @Query("SELECT itemName FROM Item WHERE itemName LIKE %:itemName%")
+    List<Item> searchItem(String name);
 
-    @Query("SELECT DISTINCT typeName FROM item")
+    @Query("SELECT DISTINCT typeName FROM Item")
     List<String> getAllTypes();
 
-    @Query("SELECT itemName FROM item WHERE typeName IS :typeName")
-    List<item> getAllItemsOfType(String typeName);
+    @Query("SELECT itemName FROM Item WHERE typeName IS :typeName")
+    List<Item> getAllItemsOfType(String typeName);
 
     @Insert
-    void insertAll(List<item> items);
+    void insertAll(List<Item> items);
 
     @Update
-    void update(item item);
+    void update(Item item);
 
     @Delete
-    void delete(item item);
+    void delete(Item item);
 
 }

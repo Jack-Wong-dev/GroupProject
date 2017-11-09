@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.ColumnInfo;
 
 @Entity
-public class item {
+public class Item {
 
     @PrimaryKey(autoGenerate = true)
     private int uid;

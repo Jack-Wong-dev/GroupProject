@@ -6,7 +6,7 @@ package glm.seclass.qc.edu.glm;
 import android.arch.persistence.room.*;
 
 
-@Database(entities = {item.class}, version = 1)
+@Database(entities = {Item.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GroceryListDAO groceryListDAO();
 }

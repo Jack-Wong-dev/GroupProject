@@ -7,7 +7,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.ColumnInfo;
 
-public class groceryListsTable {
+public class GroceryListsTable {
 
 
     @PrimaryKey(autoGenerate = true)
