@@ -26,6 +26,9 @@ public interface GroceryListDAO {
     @Query("SELECT DISTINCT typeName FROM item")
     List<String> getAllTypes();
 
+    @Query("SELECT itemName FROM item WHERE typeName IS :typeName")
+    List<item> getAllItemsOfType(String typeName);
+
     @Insert
     void insertAll(List<item> items);
 

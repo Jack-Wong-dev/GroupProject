@@ -28,7 +28,44 @@ public class groceryListsTable {
     @ColumnInfo(name = "itemType")
     private String itemType;
 
+    public boolean isCheckMark() {
+        return checkMark;
+    }
 
+    public void setCheckMark(boolean checkMark) {
+        this.checkMark = checkMark;
+    }
 
-    // getters and setters
+    public String getListName() {
+        return listName;
+    }
+
+    public void setListName(String listName) {
+        this.listName = listName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
 }

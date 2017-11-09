@@ -10,7 +10,14 @@ import android.arch.persistence.room.ColumnInfo;
 @Entity
 public class item {
 
+<<<<<<< HEAD
     @PrimaryKey(autoGenerate = false)
+=======
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
+
+    @ColumnInfo(name = "itemName")
+>>>>>>> 69c193ac46c4f39301182471bd6383a61ffdd04e
     private String itemName;
 
     @ColumnInfo(name = "typeName")
