@@ -14,28 +14,20 @@ import java.util.*;
 @Dao
 public interface GroceryListDAO {
 
-    @Query("SELECT DISTINCT listName FROM groceryLists")
+    @Query("SELECT DISTINCT listName FROM GroceryListsTable")
     List<String> getAllLists();
 
-    @Query("SELECT * FROM groceryLists WHERE listName LIKE :listName")
-    List<item> getSelectedList(String listName);
+    @Query("SELECT * FROM GroceryListsTable WHERE listName LIKE :listName GROUP BY itemType")
+    List<Item> getSelectedList(String listName);
 
-    @Query("SELECT itemName FROM item WHERE itemName LIKE %:itemName%")
-    List<item> searchItem(String name);
-
-    @Query("SELECT DISTINCT typeName FROM item")
-    List<String> getAllTypes();
-
-    @Query("SELECT itemName FROM item WHERE typeName IS :typeName")
-    List<item> getAllItemsOfType(String typeName);
-
+    
     @Insert
-    void insertAll(List<item> items);
+    void insertAll(List<Item> items);
 
     @Update
-    void update(item item);
+    void update(Item item);
 
     @Delete
-    void delete(item item);
+    void delete(Item item);
 
 }
