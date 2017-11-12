@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GLM</string>
+    <string name="title_activity_select_list_screen">SelectListScreen</string>
+    <string name="search">Search</string>
+    <string name="item_search">Item Search</string>
 </resources>

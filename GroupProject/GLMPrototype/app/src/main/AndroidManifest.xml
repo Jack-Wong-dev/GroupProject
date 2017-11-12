@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="glm.seclass.qc.edu.glm">
+    package="com.example.asian.glmprototype">
 
     <application
         android:allowBackup="true"

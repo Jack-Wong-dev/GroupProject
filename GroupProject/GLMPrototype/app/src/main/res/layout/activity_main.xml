@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="glm.seclass.qc.edu.glm.MainActivity">
+    tools:context="com.example.asian.glmprototype.MainActivity">
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
-        android:layout_above="@id/createListButton"
+        android:layout_alignParentStart="true"
         ></ListView>
 
     <Button
@@ -23,12 +23,8 @@
         android:onClick="displaySearchScreen"
         android:text="Item Search" />
 
-    <Button
-        android:id="@+id/createListButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/searchItemButton"
-        android:layout_centerHorizontal="true"
-        android:text="Create List" />
+
 
 </RelativeLayout>
+
+
