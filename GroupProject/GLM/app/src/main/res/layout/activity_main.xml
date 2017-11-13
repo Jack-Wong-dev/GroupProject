@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="glm.seclass.qc.edu.glm.MainActivity">
+    tools:context="glm.seclass.qc.edu.glm.MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <SearchView
         android:layout_width="372dp"
         android:layout_height="59dp"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="436dp" />
 </android.support.constraint.ConstraintLayout>
