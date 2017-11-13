@@ -10,22 +10,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     Button createList;
     Button browse;
+    Button destroy;
     Context context = this;
+    LinearLayout scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        destroy = findViewById(R.id.destroyDB);
         createList = findViewById(R.id.createList);
         browse = findViewById(R.id.browse);
 
-        GLDatabase db = GLDatabase.getAppDatabase(this);
+        final GLDatabase db = GLDatabase.getAppDatabase(this);
 
 //        This commented part is how to create new item
 //        creating tuples for grocery list should be similar to this
@@ -41,9 +47,16 @@ public class MainActivity extends AppCompatActivity {
 //            Log.e("items number " + i, example.get(i));
 //        }
 
+        scrollView = (LinearLayout) findViewById(R.id.MainLayout);
+
+        List<String> allList = db.groceryListNamesDAO().getAllLists();
+        for(int i = 0; i < allList.size(); i++){
+            Button button = new Button(context);
+            button.setText(allList.get(i));
+            scrollView.addView(button);
+        }
 
 //      this part is supposed to prompt EditText field
-        final LinearLayout scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
         createList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +76,23 @@ public class MainActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Button newList = new Button(context);
-                                        newList.setText(userInput.getText());
-                                        scrollView.addView(newList);
-                                }
+                                        String userText = userInput.getText().toString();
+                                        GroceryListNames newListName = new GroceryListNames();
+                                        newListName.setListName(userText);
+                                        if(db.groceryListNamesDAO().find(userText) != null){
+                                            Context context = getApplicationContext();
+                                            CharSequence text = "Hello toast!";
+                                            int duration = Toast.LENGTH_SHORT;
+                                            Toast toast = Toast.makeText(context, text, duration);
+                                            toast.show();
+                                        }
+                                        else{
+                                            Button newList = new Button(context);
+                                            newList.setText(userInput.getText());
+                                            scrollView.addView(newList);
+                                            db.groceryListNamesDAO().insert(newListName);
+                                        }
+                                    }
                         })
                         .setNegativeButton("Cancel",
                             new DialogInterface.OnClickListener() {
@@ -78,6 +104,13 @@ public class MainActivity extends AppCompatActivity {
                         );
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
+            }
+        });
+        destroy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.destroyInstance();
+
             }
         });
     }

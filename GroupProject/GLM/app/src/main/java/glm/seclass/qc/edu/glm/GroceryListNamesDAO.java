@@ -18,6 +18,9 @@ public interface GroceryListNamesDAO {
     @Query("SELECT * FROM GroceryListNames")
     List<String> getAllLists();
 
+    @Query("SELECT listName FROM GroceryListNames WHERE listName IS :listName")
+    GroceryListNames find(String listName);
+
     @Insert
     void insert(GroceryListNames listName);
 

@@ -13,8 +13,9 @@ public abstract class GLDatabase extends RoomDatabase {
     public abstract GroceryListsTableDAO groceryListDAO();
     public abstract ItemDAO itemDAO();
     public abstract  GroceryListNamesDAO groceryListNamesDAO();
-
+    private static Context myContext;
     public static GLDatabase getAppDatabase(Context context){
+        myContext = context;
         if(INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     GLDatabase.class, "grocerylist-database").allowMainThreadQueries().build();
@@ -23,5 +24,6 @@ public abstract class GLDatabase extends RoomDatabase {
     }
     public static void destroyInstance() {
         INSTANCE = null;
+        myContext.deleteDatabase("grocerylist-database");
     }
 }
