@@ -18,7 +18,7 @@ public interface GroceryListDAO {
     List<String> getAllLists();
 
     @Query("SELECT * FROM GroceryListsTable WHERE listName LIKE :listName GROUP BY itemType")
-    List<Item> getSelectedList(String listName);
+    List<GroceryListsTable> getSelectedList(String listName);
 
     
     @Insert

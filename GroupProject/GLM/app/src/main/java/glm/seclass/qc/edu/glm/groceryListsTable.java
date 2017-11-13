@@ -3,30 +3,37 @@ package glm.seclass.qc.edu.glm;
 /**
  * Created by Lin on 11/9/17.
  */
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.ColumnInfo;
 
-@Entity
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity(foreignKeys = @ForeignKey(entity = Item.class, parentColumns = "itemName", childColumns = "itemName"))
 public class GroceryListsTable {
 
     @PrimaryKey(autoGenerate = true)
-    private int listID;
-
-    @ColumnInfo(name = "checkMark")
+    private int glID;
+    private int quantity;
     private boolean checkMark;
-
-    @ColumnInfo(name = "listName")
     private String listName;
-
-    @ColumnInfo(name = "itemName")
     private String itemName;
-
-    @ColumnInfo(name = "quantity")
-    private  int quantity;
-
-    @ColumnInfo(name = "itemType")
     private String itemType;
+
+    public int getGlID() {
+        return glID;
+    }
+
+    public void setGlID(int glID) {
+        this.glID = glID;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public boolean isCheckMark() {
         return checkMark;
@@ -52,14 +59,6 @@ public class GroceryListsTable {
         this.itemName = itemName;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getItemType() {
         return itemType;
     }
@@ -67,5 +66,4 @@ public class GroceryListsTable {
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
-
 }
