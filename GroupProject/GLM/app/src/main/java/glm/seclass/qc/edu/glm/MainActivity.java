@@ -54,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
             Button button = new Button(context);
             button.setText(allList.get(i));
             scrollView.addView(button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
 //      this part is supposed to prompt EditText field
@@ -80,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
                                         GroceryListNames newListName = new GroceryListNames();
                                         newListName.setListName(userText);
                                         if(db.groceryListNamesDAO().find(userText) != null){
-                                            Context context = getApplicationContext();
-                                            CharSequence text = "Hello toast!";
+                                            CharSequence text = "That list already exists!";
                                             int duration = Toast.LENGTH_SHORT;
                                             Toast toast = Toast.makeText(context, text, duration);
                                             toast.show();
@@ -110,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db.destroyInstance();
-
             }
         });
+
     }
 }
 
