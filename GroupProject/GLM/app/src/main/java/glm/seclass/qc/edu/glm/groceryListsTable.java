@@ -8,7 +8,20 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = Item.class, parentColumns = "itemName", childColumns = "itemName"))
+@Entity(foreignKeys =
+        {
+                @ForeignKey(
+                        entity = Item.class,
+                        parentColumns = "itemName",
+                        childColumns = "itemName"
+                ),
+                @ForeignKey(
+                        entity = GroceryListNames.class,
+                        parentColumns = "listName",
+                        childColumns = "listName"
+                )
+        }
+)
 public class GroceryListsTable {
 
     @PrimaryKey(autoGenerate = true)

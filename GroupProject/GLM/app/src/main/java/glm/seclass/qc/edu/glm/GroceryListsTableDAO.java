@@ -12,7 +12,7 @@ import android.arch.persistence.room.Dao;
 import java.util.*;
 
 @Dao
-public interface GroceryListDAO {
+public interface GroceryListsTableDAO {
 
     @Query("SELECT DISTINCT listName FROM GroceryListsTable")
     List<String> getAllLists();

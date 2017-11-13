@@ -6,12 +6,13 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 
-@Database(entities = {Item.class , GroceryListsTable.class}, version = 1)
+@Database(entities = {Item.class , GroceryListsTable.class, GroceryListNames.class}, version = 1)
 public abstract class GLDatabase extends RoomDatabase {
 
     private static GLDatabase INSTANCE;
-    public abstract GroceryListDAO groceryListDAO();
+    public abstract GroceryListsTableDAO groceryListDAO();
     public abstract ItemDAO itemDAO();
+    public abstract  GroceryListNamesDAO groceryListNamesDAO();
 
     public static GLDatabase getAppDatabase(Context context){
         if(INSTANCE == null){
