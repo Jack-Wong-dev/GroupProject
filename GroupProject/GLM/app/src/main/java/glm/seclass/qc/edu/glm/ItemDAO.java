@@ -22,8 +22,9 @@ public interface ItemDAO {
     @Query("SELECT * FROM Item WHERE typeName IS :typeName")
     List<Item> getAllItemsOfType(String typeName);
 
-    @Query("SELECT DISTINCT typeName FROM Item")
-    List<Item> getAllTypes();
+//    this throws an error could be something with SQL call
+//    @Query("SELECT DISTINCT typeName FROM Item")
+//    List<Item> getAllTypes();
 
     @Query("SELECT * FROM Item")
     List<Item> getAllItems();
