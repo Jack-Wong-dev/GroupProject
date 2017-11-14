@@ -53,7 +53,7 @@ Selenium should be used for functional  tests.
 | ﻿test cases                 | purpose                                        | steps                                                                                              | expected result | actual result |
 |----------------------------|------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------------|---------------|
 | create a list              | To see if users can create a list              | click on create a list                                                                             |                 |               |
-| search for a list          | To see if users can search for a list          | click on text field for list search, type in a list, and hit search                                |                 |               |
+| |    |                                |                 |               |
 | select a list              | To see if users can select a list              | tap on a list                                                                                      |                 |               |
 | rename a list              | To see if users can rename a list              | tap on a list, then tap rename                                                                     |                 |               |
 | delete a list              | To see if users can delete a list              | tap on a list, then tap delete                                                                     |                 |               |
