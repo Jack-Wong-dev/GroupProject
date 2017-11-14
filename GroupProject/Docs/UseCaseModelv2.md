@@ -4,7 +4,7 @@
 
 ## 1 Use Case Diagram
 
-![Use Case Diagram](images/UseCaseDiagram.png)
+![Use Case Diagramv2](images/UseCaseDiagramv2.png)
 
 ## 2 Use Case Descriptions
 
@@ -19,21 +19,10 @@ until there is; this attempt at creation returns a message to the user clarifyin
 the user calls the method, but attempts to create a list with the same name as another, this  
 method should also return a message telling the user he or she cannot do this, but allow the user  
 to attempt to create a list again. Normally, the user should ask to create a list, and a blank,  
-new list is created for the user to modify. 
+new list is created for the user to modify.  
 
 
-2. Search for List
-   - The user can optionally call on this function if he or she would like to search their  
-created lists for a particular list by name. 
-	- There must be at least one list present for the user to search. 
-	- There are no particular post-conditions that must be true once the use case is run. 
-	- Once the method is invoked, If the searched-for list exists, then the method should  
-then confirm with the user that it does, and offer the user the option of selecting the list. If  
-it does not exist, then the program should relay so to the user, and ask the user if he or she  
-would like to create such a list. 
-
-
-3. Select a List
+2. Select a List
 	- The user can pick a list to modify with this use case. 
 	- There must be at least one list in existence for the user to select before this use  
 case is run. 
@@ -43,7 +32,7 @@ that the user is currently modifying. In addition, the user should be allowed to
 list and simply exit the called function. 
 
 
-4. Rename a List 
+3. Rename a List 
 	- The user must be able to create a new name for a currently existing list. 
 	- Before the case is run, there must be at least one list in existence. In addition, the  
 list to be modified must be the currently selected list. 
@@ -56,7 +45,7 @@ option of renaming again. If it does not match any existing list, the rename sho
 go through. 
 
 
-5. Delete a List
+4. Delete a List
 	- The user must be able to delete a currently existing list. 
 	- Before the case is run, there must be at least one list in existence. In addition, the  
 list to be deleted must be the currently selected list. 
@@ -67,7 +56,7 @@ list to be deleted. Once the list is erased, the application should ask the user
 would like to create, search, or select a list.
 
 
-6. Search for Item by Type
+5. Search for Item by Type
 	- The user must be able to specify the type of the item to then select the name of an  
 item to add it to the list currently in modification. 
 	- Before the use case is run, there must be at least one type and name associated with  
@@ -81,7 +70,7 @@ then allowed to change the quantity from there. The application must again ask t
 would like to add an item by type, but also give the option for the user to exit the method. 
 
 
-7. Add Item to List
+6. Add Item to List
 	- The specified item must be added to the currently modified list with this use case. 
 	- There must be at least one item in the database for the user to modify. 
 	- After the use case is run, the use case "Change Item Quantity" is invoked to  
@@ -91,7 +80,7 @@ and then name. The name and type of the specified item are recorded, and this in
 placed onto the list, grouped together by type. 
 
 
-8. Change Item Quantity 
+7. Change Item Quantity 
 	- This use case must allow the user to change the item quantity specified. 
 	- There must be an item currently specified in order to invoke this use case. 
 	- After the use case is run, the item specified must have its updated quantity recorded  
@@ -100,7 +89,7 @@ in memory.
 updated to the newly specified quantity. The user then must select an item again to modify it. 
 
 
-9. Search for Item by Query
+8. Search for Item by Query
 	- This use case must allow the user to add an item to the list by searching for it in the  
 database. 
 	- There are no particular pre-conditions that must be true before the use case is run.  
@@ -113,7 +102,7 @@ of the returned results are correct, the user should be given the option to invo
 "Add New Item to Database". 
 
 
-10. Select Item From List
+9. Select Item From List
 	- After this use case is invoked, an item should be highlighted for modification in the  
 list currently being modified. 
 	- There must be at least one item on this list for the use case to be invoked. 
@@ -123,7 +112,7 @@ eventually settling on an item to specify. When this item is specified, options 
 its modification. 
 
 
-11. Delete Item
+10. Delete Item
 	- This use case should allow the user to remove an item from a list currently being  
 modified. 
 	- There must be an item present on the list in order for this use case to be invoked. 
@@ -135,7 +124,7 @@ and then the item is removed from the list. Optionally, the user can decide not 
 item as well. 
 
 
-12. Add New Item to Database
+11. Add New Item to Database
 	- This use case is invoked by "Search for Item by Query" and allows the user to add items  
 into the database. 
 	- Before use-case is run, the use case "Search for Item by Query" must have been called  
@@ -148,7 +137,7 @@ specified type and name should be confirmed, and then the database should be upd
 new item.
 
 
-13. Check Off Specific
+12. Check Off Specific
 	- This use case allows the user to check off a specific item in a list. 
 	- There must be at least one item on the list in order for this use case to be invoked. 
 	- After this use case is run, the item on the list should be updated to indicate that it  
@@ -158,7 +147,7 @@ to check off the item. If the user indicates that it would like to do so, the it
 indicate that is has indeed been checked off. 
 
 
-14. Clear Checks
+13. Clear Checks
 	- This use case must allow the user to clear all checks from a currently specified list. 
 	- There must be at least one item on the list to be modified. 
 	- The list should be updated with the indication that no item is checked off. 
@@ -167,7 +156,7 @@ checks off all items in the list. If the user would like to do so, the indicatio
 are checked is cleared. 
 
 
-15. Check Off All
+14. Check Off All
 	- This use case must allow the user to check off all items in a list. 
 	- There must be at least one item on the list for this use case to be invoked. 
 	- The list must be updated to show that all of its items have been checked off. 
