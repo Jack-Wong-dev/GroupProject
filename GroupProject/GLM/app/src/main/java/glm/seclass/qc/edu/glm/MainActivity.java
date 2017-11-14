@@ -2,6 +2,7 @@ package glm.seclass.qc.edu.glm;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button destroy;
     Context context = this;
     LinearLayout scrollView;
-
+    GLDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +32,12 @@ public class MainActivity extends AppCompatActivity {
         createList = findViewById(R.id.createList);
         browse = findViewById(R.id.browse);
 
-        final GLDatabase db = GLDatabase.getAppDatabase(this);
-
+        db = GLDatabase.getAppDatabase(this);
 //        This commented part is how to create new item
 //        creating tuples for grocery list should be similar to this
 
 //        Item newitem = new Item();
-//        newitem.setItemName("banana");
+//           newitem.setItemName("banana");
 //        newitem.setTypeName("fruit");
 //        db.itemDAO().insert(newitem);
 //        Log.e("hello", "message");
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
         List<String> allList = db.groceryListNamesDAO().getAllLists();
+
         for(int i = 0; i < allList.size(); i++){
             Button button = new Button(context);
             button.setText(allList.get(i));
@@ -119,5 +120,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void displaySearchScreen (View view){
+        Intent search_intent = new Intent(this, SearchEngine.class);
+        startActivity(search_intent);
+    }
+
 }
 

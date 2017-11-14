@@ -19,6 +19,30 @@ public abstract class GLDatabase extends RoomDatabase {
         if(INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     GLDatabase.class, "grocerylist-database").allowMainThreadQueries().build();
+
+//            this is for adding items to the first time the database is created so that users
+//            can add items from heirchical list
+//            this is still work in progress
+
+//            String [] items = new String[]{ "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
+//                    "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
+//                    "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
+//                    "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
+//
+//
+//            Log.e("tag", "before item creation");
+//            for (int i = 0; i < items.length; i++){
+//                Log.e("tag", "here! "+items[i]);
+//                Item newItem = new Item();
+//                Log.e("tag", "here! 1");
+//                newItem.setItemName(items[i]);
+//                Log.e("tag", "here! 2");
+//                newItem.setTypeName("food");
+//                Log.e("tag", "here! 3");
+//                INSTANCE.itemDAO().insert(newItem);
+//                Log.e("tag", "here! 4");
+//            }
+//            Log.e("tag", "after item creation");
         }
         return INSTANCE;
     }
