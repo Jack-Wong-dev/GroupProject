@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:context="glm.seclass.qc.edu.glm.SearchEngine">
 
     <EditText
         android:id="@+id/txtsearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="search"           />
 
     <ListView
         android:id="@+id/listview"

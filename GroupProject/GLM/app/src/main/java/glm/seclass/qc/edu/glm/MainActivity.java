@@ -2,6 +2,7 @@ package glm.seclass.qc.edu.glm;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 //        creating tuples for grocery list should be similar to this
 
 //        Item newitem = new Item();
-//        newitem.setItemName("banana");
+//           newitem.setItemName("banana");
 //        newitem.setTypeName("fruit");
 //        db.itemDAO().insert(newitem);
 //        Log.e("hello", "message");
@@ -119,5 +120,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void displaySearchScreen (View view){
+        Intent search_intent = new Intent(this, SearchEngine.class);
+        startActivity(search_intent);
+    }
+
+
+
+
+
+
 }
 
