@@ -19,8 +19,8 @@ public interface ItemDAO {
     @Query("SELECT * FROM Item WHERE item_name LIKE :name")
     List<Item> searchItem(String name);
 
-    @Query("SELECT * FROM Item i JOIN ItemType t ON i.type_id = t.type_id WHERE item_type = :itemType")
-    List<ItemAndType> getAllItemsOfType(String itemType);
+//    @Query("SELECT * FROM Item i JOIN ItemType t ON i.type_id = t.type_id WHERE item_type = :itemType")
+//    List<ItemAndType> getAllItemsOfType(String itemType);
 
     @Query("SELECT * FROM Item")
     List<Item> getAllItems();
