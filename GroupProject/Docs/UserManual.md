@@ -15,7 +15,7 @@ The application is specific for each user that installs the application, as the 
 
 ## Introduction to GLM 
 ### Initial Page
-<center>![UserManualPicture1](images/UserManualPicture1.png)</center>
+![UserManualPicture1](images/UserManualPicture1.png)
 
 When the app is first run, this screen will appear. As new lists are created, they will appear on this page of the application. 
 
