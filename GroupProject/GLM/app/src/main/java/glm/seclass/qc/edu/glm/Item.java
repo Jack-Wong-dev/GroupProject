@@ -3,30 +3,50 @@ package glm.seclass.qc.edu.glm;
 /**
  * Created by Lin on 11/9/17.
  */
-import android.arch.persistence.room.Entity;
-import android.support.annotation.NonNull;
 
-@Entity(primaryKeys = {"itemName"})
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity(foreignKeys = {@ForeignKey(
+                            entity = ItemType.class,
+                            parentColumns = "type_id",
+                            childColumns = "type_id"
+)})
 public class Item {
-    @NonNull
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "item_id")
+    private int itemId;
+
+    @ColumnInfo(name = "item_name")
     private String itemName;
 
-    private String typeName;
+    @ColumnInfo(name = "type_id")
+    private int typeId;
 
-    public void setItemName(String itemName){
-        this.itemName = itemName;
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setTypeName(String typeName){
-        this.typeName = typeName;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
-    public String getItemName(){
+    public String getItemName() {
         return itemName;
     }
 
-    public String getTypeName(){
-        return typeName;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
 }

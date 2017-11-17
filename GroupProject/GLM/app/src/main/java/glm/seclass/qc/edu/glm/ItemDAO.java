@@ -15,16 +15,12 @@ import java.util.List;
 @Dao
 public interface ItemDAO {
 
-//    when doing this add % to beginning and end of search term
-    @Query("SELECT * FROM Item WHERE itemName LIKE :name")
+    //when doing this add % to beginning and end of search term
+    @Query("SELECT * FROM Item WHERE item_name LIKE :name")
     List<Item> searchItem(String name);
 
-    @Query("SELECT * FROM Item WHERE typeName IS :typeName")
-    List<Item> getAllItemsOfType(String typeName);
-
-    //    this throws an error could be something with SQL call
-    @Query("SELECT typeName FROM Item GROUP BY typeName")
-    List<String> getAllTypes();
+    @Query("SELECT * FROM Item i JOIN ItemType t ON i.type_id = t.type_id WHERE item_type = :itemType")
+    List<ItemAndType> getAllItemsOfType(String itemType);
 
     @Query("SELECT * FROM Item")
     List<Item> getAllItems();

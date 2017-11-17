@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         createList = findViewById(R.id.createList);
         browse = findViewById(R.id.browse);
 
-        db = GLDatabase.getAppDatabase(this);
+        InitDatabase.create(context);
+        InitDatabase.populateDB();
+        db = InitDatabase.getDB();
 //        This commented part is how to create new item
 //        creating tuples for grocery list should be similar to this
 
@@ -49,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
-        List<String> allList = db.groceryListNamesDAO().getAllLists();
+        List<GroceryList> groceryListsList = db.groceryListDAO().getAll();
 
-        for(int i = 0; i < allList.size(); i++){
+        for(int i = 0; i < groceryListsList.size(); i++){
             Button button = new Button(context);
-            button.setText(allList.get(i));
+            button.setText(groceryListsList.get(i).getListName());
             scrollView.addView(button);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         String userText = userInput.getText().toString();
-                                        GroceryListNames newListName = new GroceryListNames();
+                                        GroceryList newListName = new GroceryList();
                                         newListName.setListName(userText);
-                                        if(db.groceryListNamesDAO().find(userText) != null){
+                                        if(db.groceryListDAO().find(userText) != null){
                                             CharSequence text = "That list already exists!";
                                             int duration = Toast.LENGTH_SHORT;
                                             Toast toast = Toast.makeText(context, text, duration);
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                             Button newList = new Button(context);
                                             newList.setText(userInput.getText());
                                             scrollView.addView(newList);
-                                            db.groceryListNamesDAO().insert(newListName);
+                                            db.groceryListDAO().insert(newListName);
                                         }
                                     }
                         })
@@ -115,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         destroy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.destroyInstance();
+                InitDatabase.destroy(context);
             }
         });
 
