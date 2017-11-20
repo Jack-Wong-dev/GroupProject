@@ -3,7 +3,10 @@ package glm.seclass.qc.edu.glm;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.util.Log;
 
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Created by Lin on 11/15/17.
  */
@@ -19,6 +22,7 @@ public class InitDatabase extends Application {
         if (db == null) {
             db = Room.databaseBuilder(myContext.getApplicationContext(),
                     GLDatabase.class, "grocerylist-database").allowMainThreadQueries().build();
+            populateDB();
         }
     }
 
@@ -31,8 +35,33 @@ public class InitDatabase extends Application {
         return db;
     }
 
-    public static void populateDB() {
+    private static void populateDB() {
         db.groceryListDAO().insert(new GroceryList("Test List"));
+
+        ItemType drinks = new ItemType("Drink" , "Ounce");
+        ItemType fruits = new ItemType("Fruit" , "Ounce");
+        ItemType meat = new ItemType("Meat" , "Ounce");
+        List<ItemType> listOfTypes = new ArrayList<>();
+        listOfTypes.add(drinks);
+        listOfTypes.add(fruits);
+        listOfTypes.add(meat);
+        long[] typeID = db.itemTypeDAO().insert(listOfTypes.get(0) , listOfTypes.get(1) ,listOfTypes.get(2) );
+
+
+        String[] drinksAry = {"Sprite" , "Coke" , "Pepsi" , "Fanta" , "Vitamin Water" , "Gatorade" , "Mountain Dew",
+                                "Orange Juice" , "Water" , "Beer"};
+        String[] fruitsAry = {"Apple" , "Orange" , "Banana" , "Tangerine" , "Lemon" , "Mango" , "Watermelon",
+                "Raspberries" , "Grapefruit" , "Peach"};
+        String[] meatAry = {"Beef" , "Steak" , "Chicken" , "Bacon" , "Turkey" , "Ham" , "Pepperoni" , "Spam",
+                            "Hotdog" , "Meatball"};
+        List<Item> listOfItems = new ArrayList<>();
+        for(int i = 0 ; i < 10 ; i++ ){
+            listOfItems.add(new Item(drinksAry[i] , (int)typeID[0]));
+            listOfItems.add(new Item(fruitsAry[i] , (int)typeID[1]));
+            listOfItems.add(new Item(meatAry[i] , (int)typeID[2]));
+        }
+
+        db.itemDAO().insertAll(listOfItems);
     }
 }
 

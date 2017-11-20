@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         browse = findViewById(R.id.browse);
 
         InitDatabase.create(context);
-        InitDatabase.populateDB();
+        //InitDatabase.populateDB();
         db = InitDatabase.getDB();
 //        This commented part is how to create new item
 //        creating tuples for grocery list should be similar to this
