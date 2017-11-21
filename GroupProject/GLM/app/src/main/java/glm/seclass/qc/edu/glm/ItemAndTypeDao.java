@@ -14,3 +14,4 @@ public interface ItemAndTypeDAO {
     @Query("SELECT * FROM Item i JOIN ItemType t ON i.type_id = t.type_id WHERE item_type = :itemType")
     List<ItemAndType> getAllItemsOfType(String itemType);
 }
+
