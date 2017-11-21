@@ -170,4 +170,34 @@ public class MyTasks {
             super.onPostExecute(aVoid);
         }
     }
+    private static List<Item> listOfItemsFromSearch;
+    private static class SearchSimilarItems extends AsyncTask<String , Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String s = "%" + strings[0] + "%";
+            listOfItemsFromSearch = db.itemDAO().searchItem(s);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+
+    public List<Item> searchSimilarItems(){
+        try {
+            Void wait = new SearchSimilarItems().execute().get();
+        }
+        catch (Exception e){
+            Log.e("Tag", "Error in searchSimilarItems method");
+        }
+        return listOfItemsFromSearch;
+    }
 }

@@ -19,6 +19,7 @@ public class SearchEngine extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView listView;
     EditText editText;
+    MyTasks myTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +71,19 @@ public class SearchEngine extends AppCompatActivity {
 //                "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
 //        listItems= new ArrayList<>(Arrays.asList(items));
 
-        List<String> al = InitDatabase.getDB().itemDAO().getAllItemName(); // zero size
-        List<Item> itemList = InitDatabase.getDB().itemDAO().getAllItems();
-        List<String> listName = new ArrayList<>();
-        for(int i = 0; i < itemList.size() ; i++ ){
-            listName.add(itemList.get(i).getItemName());
-        }
+        myTasks = new MyTasks(this);
+//
+//        List<Item> itemList = InitDatabase.getDB().itemDAO().getAllItems();
+//        List<String> listName = new ArrayList<>();
+//        for(int i = 0; i < itemList.size() ; i++ ){
+//            listName.add(itemList.get(i).getItemName());
+//        }
+//
+//        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listName);
+//        listView.setAdapter(adapter);
 
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listName);
-        listView.setAdapter(adapter);
+
+
 
     }
 }
