@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
     Boolean canCreate;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,49 +37,11 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
         createList = findViewById(R.id.createList);
         search = findViewById(R.id.search);
 
-//        InitDatabase.create(context);
-
         myTasks = new MyTasks(this, this);
         myTasks.populateDB();
         myTasks.getLists();
 
-//        db = InitDatabase.getDB();
-
-//        Log.e("some tag", "after creating db");
-//        This commented part is how to create new item
-//        creating tuples for grocery list should be similar to this
-
-//        Item newitem = new Item();
-//           newitem.setItemName("banana");
-//        newitem.setTypeName("fruit");
-//        db.itemDAO().insert(newitem);
-//        Log.e("hello", "message");
-//        List<String> example = db.itemDAO().getAllTypes();
-//
-//        for(int i = 0; i < example.size(); i++) {
-//            Log.e("items number " + i, example.get(i));
-//        }
-
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
-
-//        Log.e("some tag", "before Init.getlist");
-//        List<GroceryList> groceryListsList = db.groceryListDAO().getAll();
-
-//        Log.e("some tag", "after get items");
-//        Log.e("some tag", "after initgetlist");
-//        for(int i = 0; i < items.size(); i++){
-//            Button button = new Button(context);
-//            button.setText(items.get(i).getItemName());
-//            scrollView.addView(button);
-//            button.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//            });
-//        }
-
-//      this part is supposed to prompt EditText field
 
         createList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,22 +61,21 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-//                                        String userText = userInput.getText().toString();
-//                                        GroceryList newListName = new GroceryList();
-//                                        newListName.setListName(userText);
-//                                        myTasks.insert(userText, "list");
-//                                        if(!canCreate){
-//                                            CharSequence text = "That list already exists!";
-//                                            int duration = Toast.LENGTH_SHORT;
-//                                            Toast toast = Toast.makeText(context, text, duration);
-//                                            toast.show();
-//                                        }
-//                                        else{
-//                                            Button newList = new Button(context);
-//                                            newList.setText(userInput.getText());
-//                                            scrollView.addView(newList);
-////                                            db.groceryListDAO().insert(newListName);
-//                                        }
+                                        String userText = userInput.getText().toString();
+
+                                        if(myTasks.findExistingList(userText)){
+                                            CharSequence text = "That list already exists!";
+                                            int duration = Toast.LENGTH_SHORT;
+                                            Toast toast = Toast.makeText(context, text, duration);
+                                            toast.show();
+                                        }
+                                        else{
+                                            myTasks.insertNewList(userText);
+                                            Button newList = new Button(context);
+                                            newList.setText(userInput.getText());
+                                            scrollView.addView(newList);
+//                                            db.groceryListDAO().insert(newListName);
+                                        }
                                     }
                         })
                         .setNegativeButton("Cancel",
@@ -154,16 +117,6 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
                 }
             });
         }
-    }
-    @Override
-    public Boolean canCreate(Boolean found){
-        if(found){
-            canCreate = false;
-        }
-        else{
-            canCreate = true;
-        }
-        return canCreate;
     }
 }
 

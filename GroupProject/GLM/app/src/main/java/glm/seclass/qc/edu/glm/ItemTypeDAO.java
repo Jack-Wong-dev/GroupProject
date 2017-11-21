@@ -18,7 +18,7 @@ public interface ItemTypeDAO {
     List<ItemType> getAll();
 
     @Query("SELECT * FROM ItemType WHERE item_type = :itemType")
-    ItemType get(String itemType);
+    int get(String itemType);
 
     @Insert
     long[] insert(ItemType... itemtype);

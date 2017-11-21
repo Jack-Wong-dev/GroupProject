@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MyInterface {
     public void displayListsToScrollView(List<GroceryList> lists);
-    public Boolean canCreate(Boolean found);
+//    public Boolean canCreate(Boolean found);
 }

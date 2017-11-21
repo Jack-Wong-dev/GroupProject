@@ -13,7 +13,8 @@ import java.util.List;
 public class MyTasks {
     private static GLDatabase db;
     private static MyInterface activity;
-    Context context;
+    private static Context context;
+    private static Boolean found;
 
     public MyTasks(MyInterface activity, Context context) {
         this.context = context;
@@ -24,20 +25,31 @@ public class MyTasks {
 
 
     public void populateDB() {
-//        db.groceryListDAO().insert(new GroceryList("Test List"));
-//        String [] items = new String[]{ "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
-//                "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
-//                "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
-//                "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
         new Populate().execute();
     }
 
     public void getLists(){
         new GetLists().execute();
     }
-//    public void find(String listName, String entity){
-//        new FindList().execute(entity);
-//    }
+    public Boolean findExistingList(String listName){
+        try {
+            Void wait = new FindList().execute(listName).get();
+        }
+        catch (Exception e){
+            Log.e("Tag", "Error in mytaskfind");
+        }
+        Log.e("Tag", found.toString() +" is value of found");
+        return found;
+    }
+
+    public void insertNewList(String newListName){
+        try{
+            Void  wait = new InsertNewList().execute(newListName).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "Error in mytask insert new list method");
+        }
+    }
     private static class Populate extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -54,20 +66,22 @@ public class MyTasks {
                 newList.setListName("new list");
                 db.groceryListDAO().insert(newList);
                 ItemType itemType = new ItemType();
-                itemType.setTypeId(1);
-            String [] items = new String[]{ "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
-                    "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
-                    "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
-                    "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
-            for(int i = 0; i < items.length; i++){
-                Item item = new Item();
-                item.setItemName(items[i]);
-                item.setTypeId(1);
-                db.itemDAO().insert(item);
-            }
+                itemType.setItemType("someType");
+                db.itemTypeDAO().insert(itemType);
+                String [] items = new String[]{ "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
+                        "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
+                        "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
+                        "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
+
+                for(int i = 0; i < items.length; i++){
+                    Item item = new Item();
+                    item.setItemName(items[i]);
+                    item.setTypeId(db.itemTypeDAO().get("someType"));
+                    db.itemDAO().insert(item);
+                }
             }
             catch (Exception e){
-                Log.e("Tag", e.getMessage());
+                Log.e("Tag", e.getMessage() + "Error over here");
             }
             return null;
         }
@@ -103,35 +117,57 @@ public class MyTasks {
         }
     }
 
-//    private static class FindList extends AsyncTask<String, Void, Boolean> {
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//
-//            //Perform pre-adding operation here.
-//        }
-//
-//        @Override
-//        protected Boolean doInBackground(String ... name) {
-//            GroceryList found = db.groceryListDAO().find(name[0]);
-//            if(found != null){
-//                return true;
-//            }
-//            return false;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Boolean found) {
-////            activity.displayListsToScrollView(lists);
+    private static class FindList extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //Perform pre-adding operation here.
+        }
+
+        @Override
+        protected Void doInBackground(String ... name) {
+            Log.e("newtag", "message in dib for find");
+            GroceryList listCandidate = db.groceryListDAO().find(name[0]);
+//            Log.e("newtag", "message in dib for find after search value " + listCandidate.toString());
+            if(listCandidate != null){
+                found = true;
+            }
+            else{
+                found = false;
+            }
+            Log.e("tag", "found is " + found.toString());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void params) {
+//            activity.displayListsToScrollView(lists);
 //            activity.canCreate(found);
-////            return found;
-//            super.onPostExecute(found);
-//            //To after addition operation here.
-//        }
-//    }
+//            return found;
+            super.onPostExecute(params);
+            //To after addition operation here.
+        }
+    }
 
-//    private static class insertList
+    private static class InsertNewList extends AsyncTask<String , Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
+        @Override
+        protected Void doInBackground(String... strings) {
+            GroceryList newlist = new GroceryList();
+            newlist.setListName(strings[0]);
+            db.groceryListDAO().insert(newlist);
+            return null;
+        }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
 }

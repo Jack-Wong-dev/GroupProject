@@ -26,10 +26,11 @@ public class Item {
     @ColumnInfo(name = "type_id")
     private int typeId;
 
-    public Item(String itemName , int typeId){
-        this.itemName = itemName;
-        this.typeId = typeId;
-    }
+//    public Item(String itemName , int typeId){
+//        this.itemName = itemName;
+//        this.typeId = typeId;
+//    }
+
     public int getItemId() {
         return itemId;
     }
