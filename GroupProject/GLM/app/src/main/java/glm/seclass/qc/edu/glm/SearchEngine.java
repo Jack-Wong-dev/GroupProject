@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class SearchEngine extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class SearchEngine extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (s.toString().equals("")) {
-
+                    initList();
                 } else {
                     //perform search
                     searchItem(s.toString());
@@ -54,11 +55,18 @@ public class SearchEngine extends AppCompatActivity {
     }
 
     public void searchItem(String textToSearch){
-        for(String item:items){
+        String[] arr = new String[listItems.size()];
+        arr = listItems.toArray(arr);
+        for(String item:arr){
             if(!item.toLowerCase().contains(textToSearch.toString().toLowerCase())){
                 listItems.remove(item);
             }
         }
+//        for(String item:listItems){
+//            if(!item.toLowerCase().contains(textToSearch.toString().toLowerCase())){
+//                listItems.remove(item);
+//            }
+//        }
 
         adapter.notifyDataSetChanged();
     }
@@ -73,14 +81,14 @@ public class SearchEngine extends AppCompatActivity {
 
         myTasks = new MyTasks(this);
 //
-        //List<Item> itemList = myTasks.getItems();
-        List<Item> itemList = myTasks.searchSimilarItems("Coke");
-        List<String> listName = new ArrayList<>();
+        List<Item> itemList = myTasks.getItems();
+
+        listItems = new ArrayList<>();
         for(int i = 0; i < itemList.size() ; i++ ){
-            listName.add(itemList.get(i).getItemName());
+            listItems.add(itemList.get(i).getItemName());
         }
 //
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listName);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
         listView.setAdapter(adapter);
 
 
