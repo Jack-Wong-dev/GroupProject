@@ -25,6 +25,9 @@ public interface ItemDAO {
     @Query("SELECT item_name FROM Item")
     List<String> getAllItemName();
 
+    @Query("SELECT * FROM Item WHERE item_id = :itemId")
+    Item getItem(int itemId);
+
     @Insert
     void insertAll(List<Item> items);
 

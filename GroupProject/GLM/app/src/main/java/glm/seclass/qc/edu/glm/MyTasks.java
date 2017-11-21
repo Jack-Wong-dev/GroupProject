@@ -47,7 +47,7 @@ public class MyTasks {
         return found;
     }
 
-    public void insertNewList(String newListName){
+    public static void insertNewList(String newListName){
         try{
 //            this makes main thread wait for new thread to finish
             Void  wait = new InsertNewList().execute(newListName).get();
@@ -55,6 +55,28 @@ public class MyTasks {
         catch (Exception e){
             Log.e("tag", "Error in mytask insert new list method");
         }
+    }
+
+    private static List<ListToItem> listItems;
+    public static List<ListToItem> getListItems(String listName){
+        try{
+            Void wait = new GetListItems().execute(listName).get();
+        }
+        catch (Exception e){
+            Log.e("Some tag", "error in get listItems method in my task");
+        }
+        return listItems;
+    }
+
+    private static String itemName;
+    public static String getItem(int itemId){
+        try{
+            Void wait = new GetItem().execute(itemId).get();
+        }
+        catch (Exception e){
+            Log.e("Yet another tag", "something went wrong getting item in mytask method");
+        }
+        return itemName;
     }
 
     private static class Populate extends AsyncTask<Void, Void, Void> {
@@ -170,4 +192,59 @@ public class MyTasks {
             super.onPostExecute(aVoid);
         }
     }
+
+    private static class GetListItems extends AsyncTask<String, Void, Void>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            listItems = db.listToItemDAO().getAllItems(db.groceryListDAO().find(strings[0]).getListId());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+
+    private static class GetItem extends AsyncTask<Integer, Void, Void>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Integer... ints) {
+            Item item = db.itemDAO().getItem(ints[0]);
+            itemName = item.getItemName();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
+//    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(String... strings) {
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//        }
+//
+//    }
 }
