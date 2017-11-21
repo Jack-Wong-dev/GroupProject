@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MyInterface {
+public class MainActivity extends AppCompatActivity {
 
     Button createList;
     Button search;
@@ -37,22 +37,30 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
         createList = findViewById(R.id.createList);
         search = findViewById(R.id.search);
 
-        myTasks = new MyTasks(this, this);
+        myTasks = new MyTasks(this);
         myTasks.populateDB();
-        myTasks.getLists();
+        List<GroceryList> allLists = myTasks.getLists();
 
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
+        for(int i = 0; i < allLists.size(); i++){
+            Button button = new Button(context);
+            button.setText(allLists.get(i).getListName());
+            scrollView.addView(button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
         createList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 LayoutInflater layoutInflater = LayoutInflater.from(context);
                 View promptsView = layoutInflater.inflate(R.layout.prompt, null);
-
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setView(promptsView);
-
                 final EditText userInput = (EditText) promptsView.findViewById(R.id.newListName);
 
                 alert
@@ -74,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
                                             Button newList = new Button(context);
                                             newList.setText(userInput.getText());
                                             scrollView.addView(newList);
-//                                            db.groceryListDAO().insert(newListName);
                                         }
                                     }
                         })
@@ -86,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
                                 }
                             }
                         );
+
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
             }
@@ -96,27 +104,10 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
                 InitDatabase.destroy(context);
             }
         });
-
     }
     public void displaySearchScreen (View view){
         Intent search_intent = new Intent(this, SearchEngine.class);
         startActivity(search_intent);
-    }
-
-
-    @Override
-    public void displayListsToScrollView(List<GroceryList> lists) {
-        for(int i = 0; i < lists.size(); i++){
-            Button button = new Button(context);
-            button.setText(lists.get(i).getListName());
-            scrollView.addView(button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-        }
     }
 }
 

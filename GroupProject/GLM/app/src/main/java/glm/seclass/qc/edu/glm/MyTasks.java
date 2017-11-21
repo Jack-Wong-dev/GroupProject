@@ -12,27 +12,32 @@ import java.util.List;
 
 public class MyTasks {
     private static GLDatabase db;
-    private static MyInterface activity;
     private static Context context;
-    private static Boolean found;
 
-    public MyTasks(MyInterface activity, Context context) {
+    public MyTasks(Context context) {
         this.context = context;
-        this.activity = activity;
         InitDatabase.create(context);
         this.db = InitDatabase.getDB();
     }
-
-
     public void populateDB() {
         new Populate().execute();
     }
 
-    public void getLists(){
-        new GetLists().execute();
+    private static List<GroceryList> allLists;
+    public List<GroceryList> getLists(){
+        try {
+            Void wait = new GetLists().execute().get();
+        }
+        catch (Exception e){
+            Log.e("Tag", "Error in mytask getLists method");
+        }
+        return allLists;
     }
+
+    private static Boolean found;
     public Boolean findExistingList(String listName){
         try {
+//            this makes main thread wait for new thread to finish
             Void wait = new FindList().execute(listName).get();
         }
         catch (Exception e){
@@ -44,12 +49,14 @@ public class MyTasks {
 
     public void insertNewList(String newListName){
         try{
+//            this makes main thread wait for new thread to finish
             Void  wait = new InsertNewList().execute(newListName).get();
         }
         catch (Exception e){
             Log.e("tag", "Error in mytask insert new list method");
         }
     }
+
     private static class Populate extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -60,11 +67,7 @@ public class MyTasks {
 
         @Override
         protected Void doInBackground(Void ... params) {
-//            Log.e("myTag", "1");
             try{
-                GroceryList newList = new GroceryList();
-                newList.setListName("new list");
-                db.groceryListDAO().insert(newList);
                 ItemType itemType = new ItemType();
                 itemType.setItemType("someType");
                 db.itemTypeDAO().insert(itemType);
@@ -81,7 +84,7 @@ public class MyTasks {
                 }
             }
             catch (Exception e){
-                Log.e("Tag", e.getMessage() + "Error over here");
+                Log.e("Tag", e.getMessage() + "Error in populate async dib");
             }
             return null;
         }
@@ -95,7 +98,7 @@ public class MyTasks {
 
     }
 
-    private static class GetLists extends AsyncTask<Void, Void, List<GroceryList>> {
+    private static class GetLists extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -105,14 +108,14 @@ public class MyTasks {
         }
 
         @Override
-        protected List<GroceryList> doInBackground(Void ...params) {
-            return db.groceryListDAO().getAll();
+        protected Void doInBackground(Void ...params) {
+            allLists = db.groceryListDAO().getAll();
+            return null;
         }
 
         @Override
-        protected void onPostExecute(List<GroceryList> lists) {
-            activity.displayListsToScrollView(lists);
-            super.onPostExecute(lists);
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
             //To after addition operation here.
         }
     }
@@ -143,9 +146,6 @@ public class MyTasks {
 
         @Override
         protected void onPostExecute(Void params) {
-//            activity.displayListsToScrollView(lists);
-//            activity.canCreate(found);
-//            return found;
             super.onPostExecute(params);
             //To after addition operation here.
         }
