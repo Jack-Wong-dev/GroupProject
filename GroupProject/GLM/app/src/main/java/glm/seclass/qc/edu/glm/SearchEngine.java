@@ -39,7 +39,7 @@ public class SearchEngine extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (s.toString().equals("")) {
-                    initList();
+
                 } else {
                     //perform search
                     searchItem(s.toString());
@@ -73,14 +73,15 @@ public class SearchEngine extends AppCompatActivity {
 
         myTasks = new MyTasks(this);
 //
-//        List<Item> itemList = InitDatabase.getDB().itemDAO().getAllItems();
-//        List<String> listName = new ArrayList<>();
-//        for(int i = 0; i < itemList.size() ; i++ ){
-//            listName.add(itemList.get(i).getItemName());
-//        }
+        //List<Item> itemList = myTasks.getItems();
+        List<Item> itemList = myTasks.searchSimilarItems("Coke");
+        List<String> listName = new ArrayList<>();
+        for(int i = 0; i < itemList.size() ; i++ ){
+            listName.add(itemList.get(i).getItemName());
+        }
 //
-//        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listName);
-//        listView.setAdapter(adapter);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listName);
+        listView.setAdapter(adapter);
 
 
 

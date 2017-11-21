@@ -19,10 +19,13 @@ public class ItemType {
 
     private String measurement;
 
-//    public ItemType(String itemType , String measurement){
-//        this.itemType = itemType;
-//        this.measurement = measurement;
-//    }
+    public ItemType(){
+
+    }
+    public ItemType(String itemType , String measurement){
+        this.itemType = itemType;
+        this.measurement = measurement;
+    }
 
     public int getTypeId() {
         return typeId;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
 public class MyTasks {
     private static GLDatabase db;
     private static Context context;
+    private static boolean populated = false;
 
     public MyTasks(Context context) {
         this.context = context;
@@ -20,6 +22,8 @@ public class MyTasks {
         this.db = InitDatabase.getDB();
     }
     public void populateDB() {
+        if(populated) return;
+
         new Populate().execute();
     }
 
@@ -32,6 +36,38 @@ public class MyTasks {
             Log.e("Tag", "Error in mytask getLists method");
         }
         return allLists;
+    }
+
+    private static List<Item> allItems;
+    public List<Item> getItems(){
+        try {
+            Void wait = new GetItems().execute().get();
+        }
+        catch (Exception e){
+            Log.e("Tag", "Error in mytask getLists method");
+        }
+        return allItems;
+    }
+
+    private static class GetItems extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //Perform pre-adding operation here.
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            allItems = db.itemDAO().getAllItems();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void params) {
+            super.onPostExecute(params);
+        }
     }
 
     private static Boolean found;
@@ -68,20 +104,46 @@ public class MyTasks {
         @Override
         protected Void doInBackground(Void ... params) {
             try{
-                ItemType itemType = new ItemType();
-                itemType.setItemType("someType");
-                db.itemTypeDAO().insert(itemType);
-                String [] items = new String[]{ "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
-                        "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
-                        "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
-                        "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
+//                ItemType itemType = new ItemType();
+//                itemType.setItemType("someType");
+//                db.itemTypeDAO().insert(itemType);
+//                String [] items = new String[]{ "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
+//                        "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
+//                        "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
+//                        "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
+//                Log.d("mytag" , "before for");
+//                for(int i = 0; i < items.length; i++){
+//                    Item item = new Item();
+//                    item.setItemName(items[i]);
+//                    item.setTypeId(db.itemTypeDAO().get("someType"));
+//                    db.itemDAO().insert(item);
+//                }
+//                Log.d("mytag" , "after for loop");
+//                Log.d("mytag" , "populated");
+                ItemType drinks = new ItemType("Drink" , "Ounce");
+                ItemType fruits = new ItemType("Fruit" , "Ounce");
+                ItemType meat = new ItemType("Meat" , "Ounce");
+                List<ItemType> listOfTypes = new ArrayList<>();
+                listOfTypes.add(drinks);
+                listOfTypes.add(fruits);
+                listOfTypes.add(meat);
+                long[] typeID = db.itemTypeDAO().insert(listOfTypes.get(0) , listOfTypes.get(1) ,listOfTypes.get(2) );
 
-                for(int i = 0; i < items.length; i++){
-                    Item item = new Item();
-                    item.setItemName(items[i]);
-                    item.setTypeId(db.itemTypeDAO().get("someType"));
-                    db.itemDAO().insert(item);
+
+                String[] drinksAry = {"Sprite" , "Coke" , "Pepsi" , "Fanta" , "Vitamin Water" , "Gatorade" , "Mountain Dew",
+                        "Orange Juice" , "Water" , "Beer"};
+                String[] fruitsAry = {"Apple" , "Orange" , "Banana" , "Tangerine" , "Lemon" , "Mango" , "Watermelon",
+                        "Raspberries" , "Grapefruit" , "Peach"};
+                String[] meatAry = {"Beef" , "Steak" , "Chicken" , "Bacon" , "Turkey" , "Ham" , "Pepperoni" , "Spam",
+                        "Hotdog" , "Meatball"};
+                List<Item> listOfItems = new ArrayList<>();
+                for(int i = 0 ; i < 10 ; i++ ){
+                    listOfItems.add(new Item(drinksAry[i] , (int)typeID[0]));
+                    listOfItems.add(new Item(fruitsAry[i] , (int)typeID[1]));
+                    listOfItems.add(new Item(meatAry[i] , (int)typeID[2]));
                 }
+
+                db.itemDAO().insertAll(listOfItems);
             }
             catch (Exception e){
                 Log.e("Tag", e.getMessage() + "Error in populate async dib");
@@ -91,6 +153,7 @@ public class MyTasks {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            populated = true;
             super.onPostExecute(aVoid);
 
             //To after addition operation here.
@@ -191,9 +254,9 @@ public class MyTasks {
         }
     }
 
-    public List<Item> searchSimilarItems(){
+    public List<Item> searchSimilarItems(String s){
         try {
-            Void wait = new SearchSimilarItems().execute().get();
+            Void wait = new SearchSimilarItems().execute(s).get();
         }
         catch (Exception e){
             Log.e("Tag", "Error in searchSimilarItems method");
