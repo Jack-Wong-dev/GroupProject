@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements MyInterface {
 
 //        db = InitDatabase.getDB();
 
-//        MyTasks.
 //        Log.e("some tag", "after creating db");
 //        This commented part is how to create new item
 //        creating tuples for grocery list should be similar to this

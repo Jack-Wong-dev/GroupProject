@@ -21,6 +21,8 @@ public interface ItemTypeDAO {
     ItemType get(String itemType);
 
     @Insert
+    long[] insert(ItemType... itemtype);
+    @Insert
     void insertAll(List<ItemType> itemTypes);
 
     @Insert

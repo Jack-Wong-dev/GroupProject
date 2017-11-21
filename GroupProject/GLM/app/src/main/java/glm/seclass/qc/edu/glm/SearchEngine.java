@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SearchEngine extends AppCompatActivity {
     String[] items;
@@ -62,12 +64,20 @@ public class SearchEngine extends AppCompatActivity {
 
 
     public void initList(){
-        items = new String[]{"Pen", "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
-                "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
-                "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
-                "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
-        listItems= new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
+//        items = new String[]{"Pen", "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
+//                "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
+//                "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
+//                "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
+//        listItems= new ArrayList<>(Arrays.asList(items));
+
+        List<String> al = InitDatabase.getDB().itemDAO().getAllItemName(); // zero size
+        List<Item> itemList = InitDatabase.getDB().itemDAO().getAllItems();
+        List<String> listName = new ArrayList<>();
+        for(int i = 0; i < itemList.size() ; i++ ){
+            listName.add(itemList.get(i).getItemName());
+        }
+
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listName);
         listView.setAdapter(adapter);
 
     }
