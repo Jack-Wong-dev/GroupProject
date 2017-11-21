@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout scrollView;
     GLDatabase db;
     MyTasks myTasks;
-    Boolean canCreate;
 
 
 
@@ -39,20 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
         myTasks = new MyTasks(this);
         myTasks.populateDB();
-        List<GroceryList> allLists = myTasks.getLists();
+        final List<GroceryList> allLists = myTasks.getLists();
 
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
         for(int i = 0; i < allLists.size(); i++){
             Button button = new Button(context);
+            button.setId(i+1);
             button.setText(allLists.get(i).getListName());
+            final int finalI = i;
+            button.setOnClickListener(showListView(button));
             scrollView.addView(button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
         createList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                                             myTasks.insertNewList(userText);
                                             Button newList = new Button(context);
                                             newList.setText(userInput.getText());
+                                            newList.setOnClickListener(showListView(newList));
                                             scrollView.addView(newList);
                                         }
                                     }
@@ -105,9 +102,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
     public void displaySearchScreen (View view){
         Intent search_intent = new Intent(this, SearchEngine.class);
         startActivity(search_intent);
+    }
+    View.OnClickListener showListView(final Button button)  {
+        return new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent showListView = new Intent(context, ListUI.class);
+                showListView.putExtra("thisListName", button.getText().toString());
+                startActivity(showListView);
+            }
+        };
     }
 }
 

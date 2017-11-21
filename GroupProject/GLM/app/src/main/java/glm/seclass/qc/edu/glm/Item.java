@@ -26,9 +26,6 @@ public class Item {
     @ColumnInfo(name = "type_id")
     private int typeId;
 
-    public Item(){
-
-    }
     public Item(String itemName , int typeId){
         this.itemName = itemName;
         this.typeId = typeId;
