@@ -11,18 +11,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyInterface {
 
     Button createList;
-    Button browse;
+    Button search;
     Button destroy;
     Context context = this;
     LinearLayout scrollView;
     GLDatabase db;
+    MyTasks myTasks;
+    Boolean canCreate;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
         destroy = findViewById(R.id.destroyDB);
         createList = findViewById(R.id.createList);
-        browse = findViewById(R.id.browse);
+        search = findViewById(R.id.search);
 
-        InitDatabase.create(context);
-        InitDatabase.populateDB();
-        db = InitDatabase.getDB();
+//        InitDatabase.create(context);
+
+        myTasks = new MyTasks(this, this);
+        myTasks.populateDB();
+        myTasks.getLists();
+
+//        db = InitDatabase.getDB();
+
+//        MyTasks.
+//        Log.e("some tag", "after creating db");
 //        This commented part is how to create new item
 //        creating tuples for grocery list should be similar to this
 
@@ -51,19 +61,22 @@ public class MainActivity extends AppCompatActivity {
 
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
-        List<GroceryList> groceryListsList = db.groceryListDAO().getAll();
+//        Log.e("some tag", "before Init.getlist");
+//        List<GroceryList> groceryListsList = db.groceryListDAO().getAll();
 
-        for(int i = 0; i < groceryListsList.size(); i++){
-            Button button = new Button(context);
-            button.setText(groceryListsList.get(i).getListName());
-            scrollView.addView(button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-        }
+//        Log.e("some tag", "after get items");
+//        Log.e("some tag", "after initgetlist");
+//        for(int i = 0; i < items.size(); i++){
+//            Button button = new Button(context);
+//            button.setText(items.get(i).getItemName());
+//            scrollView.addView(button);
+//            button.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//            });
+//        }
 
 //      this part is supposed to prompt EditText field
 
@@ -85,21 +98,22 @@ public class MainActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        String userText = userInput.getText().toString();
-                                        GroceryList newListName = new GroceryList();
-                                        newListName.setListName(userText);
-                                        if(db.groceryListDAO().find(userText) != null){
-                                            CharSequence text = "That list already exists!";
-                                            int duration = Toast.LENGTH_SHORT;
-                                            Toast toast = Toast.makeText(context, text, duration);
-                                            toast.show();
-                                        }
-                                        else{
-                                            Button newList = new Button(context);
-                                            newList.setText(userInput.getText());
-                                            scrollView.addView(newList);
-                                            db.groceryListDAO().insert(newListName);
-                                        }
+//                                        String userText = userInput.getText().toString();
+//                                        GroceryList newListName = new GroceryList();
+//                                        newListName.setListName(userText);
+//                                        myTasks.insert(userText, "list");
+//                                        if(!canCreate){
+//                                            CharSequence text = "That list already exists!";
+//                                            int duration = Toast.LENGTH_SHORT;
+//                                            Toast toast = Toast.makeText(context, text, duration);
+//                                            toast.show();
+//                                        }
+//                                        else{
+//                                            Button newList = new Button(context);
+//                                            newList.setText(userInput.getText());
+//                                            scrollView.addView(newList);
+////                                            db.groceryListDAO().insert(newListName);
+//                                        }
                                     }
                         })
                         .setNegativeButton("Cancel",
@@ -127,5 +141,30 @@ public class MainActivity extends AppCompatActivity {
         startActivity(search_intent);
     }
 
+
+    @Override
+    public void displayListsToScrollView(List<GroceryList> lists) {
+        for(int i = 0; i < lists.size(); i++){
+            Button button = new Button(context);
+            button.setText(lists.get(i).getListName());
+            scrollView.addView(button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+    }
+    @Override
+    public Boolean canCreate(Boolean found){
+        if(found){
+            canCreate = false;
+        }
+        else{
+            canCreate = true;
+        }
+        return canCreate;
+    }
 }
 

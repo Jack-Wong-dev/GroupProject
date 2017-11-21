@@ -1,6 +1,7 @@
 package glm.seclass.qc.edu.glm;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
