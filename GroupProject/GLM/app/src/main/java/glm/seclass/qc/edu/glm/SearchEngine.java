@@ -79,6 +79,8 @@ public class SearchEngine extends AppCompatActivity {
                                             toast.show();
                                         } else{
                                             myTasks.insertToList(listName , itemName );
+                                            setResult(1);
+                                            finish();
                                         }
 
 

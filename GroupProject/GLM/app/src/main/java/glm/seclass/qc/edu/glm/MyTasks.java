@@ -33,10 +33,10 @@ public class MyTasks {
     }
 
     private static boolean itemIsInList;
-    public boolean itemIsInList(String itemName , String listName){
+    public boolean itemIsInList(String listName , String itemName){
         try {
 //            String[] s = {itemName, listName};
-            Void wait = new ItemIsInList().execute(itemName,listName).get();
+            Void wait = new ItemIsInList().execute(listName,itemName).get();
         } catch (Exception e) {
             Log.e("Tag", "Error in mytask getLists method");
         }
@@ -523,12 +523,15 @@ public class MyTasks {
 
         @Override
         protected Void doInBackground(String... strings) {
-            String itemName = strings[0];
-            String listName = strings[1];
+            String listName = strings[0];
+            String itemName = strings[1];
             try {
                 int itemID = db.itemDAO().getItemId(itemName);
                 GroceryList groceryList = db.groceryListDAO().find(listName);
-
+                Log.e("ListName" , listName);
+                if(groceryList == null ){
+                    Log.e("null" , "null");
+                }
                 int listID = groceryList.getListId();
                 ListToItem listToItem = db.listToItemDAO().get(listID,itemID);
                 if(listToItem != null ){
