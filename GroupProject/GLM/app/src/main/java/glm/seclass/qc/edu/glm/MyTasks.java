@@ -59,26 +59,31 @@ public class MyTasks {
     }
 
     private static List<ListToItem> listItems;
-//    public static List<ListToItem> getListItems(String listName){
-//        try{
-//            Void wait = new GetListItems().execute(listName).get();
-//        }
-//        catch (Exception e){
-//            Log.e("Some tag", "error in get listItems method in my task");
-//        }
-//        return listItems;
-//    }
+    public static List<ListToItem> getListItems(String listName){
+        try{
+            Log.e("generictag", "genmessage");
+            Log.e("mydamntag" ,listName);
+            Log.e("generictag", "genmessage after");
+            Void wait = new GetListItems().execute(listName).get();
+            Log.e("newTag", "hello");
+        }
+        catch (Exception e){
+            Log.e("Some tag", "error in get listItems method in my task");
+            Log.e("hello tag", e.getMessage());
+        }
+        return listItems;
+    }
 
-    //    private static String itemName;
-//    public static String getItem(int itemId){
-//        try{
-//            Void wait = new GetItem().execute(itemId).get();
-//        }
-//        catch (Exception e){
-//            Log.e("Yet another tag", "something went wrong getting item in mytask method");
-//        }
-//        return itemName;
-//    }
+    private static String itemName;
+    public static String getItem(int itemId){
+        try{
+            Void wait = new GetItem().execute(itemId).get();
+        }
+        catch (Exception e){
+            Log.e("Yet another tag", "something went wrong getting item in mytask method");
+        }
+        return itemName;
+    }
     private static List<Item> listOfItemsFromSearch;
 
     public static List<Item> searchSimilarItems() {
@@ -99,6 +104,16 @@ public class MyTasks {
             Log.e("Tag", "Error in mytask getLists method");
         }
         return allItems;
+    }
+
+    public static void populateList(String listName){
+        try {
+            Log.e("damntag", "list is" + listName);
+            Void wait = new PopulateList().execute(listName).get();
+        }
+        catch (Exception e){
+            Log.e("another tag", "error in insert to list method");
+        }
     }
 
     private static class Populate extends AsyncTask<Void, Void, Void> {
@@ -260,31 +275,102 @@ public class MyTasks {
         }
     }
 
-//    private static class GetListItems extends AsyncTask<String, Void, Void>{
-//
-//
-//    }
+    private static class GetListItems extends AsyncTask<String, Void, Void>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-//    private static class GetItem extends AsyncTask<Integer, Void, Void>{
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Integer... ints) {
-//            Item item = db.itemDAO().getItem(ints[0]);
-//            itemName = item.getItemName();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//        }
-//
-//    }
+        @Override
+        protected Void doInBackground(String... strings) {
+            Log.e("tag it here before", "anoter message");
+            String listName = strings[0];
+            Log.e("tagithere", "please print here " + listName);
+            GroceryList list = db.groceryListDAO().find(listName);
+            Log.e("tag", "It could be crashing here" + list.getListName());
+            int listId = list.getListId();
+            Log.e("newtag", "Hello");
+            listItems = db.listToItemDAO().getAllItems(listId);
+            Log.e("tag it here", strings[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+
+    private static class GetItem extends AsyncTask<Integer, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Integer... ints) {
+            Item item = db.itemDAO().getItem(ints[0]);
+            itemName = item.getItemName();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
+
+    private static class PopulateList extends AsyncTask<String, Void, Void>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            try{
+                Log.e("Hello", "duuuuuuude");
+                ItemType newType = new ItemType("dummyType", "dummy oz");
+                db.itemTypeDAO().insert(newType);
+
+                Log.e("abreak","mannnn");
+                int typeId = db.itemTypeDAO().get("dummyType");
+                Log.e("give", ""+typeId);
+                Item someItem = new Item("dummy", typeId);
+                Log.e("annoyed","godamn");
+                db.itemDAO().insert(someItem);
+                Log.e("newerror","wtf");
+                Log.e("error", "ova hea");
+                Log.e("godDamnTag", "blah");
+
+                ListToItem listToItem = new ListToItem();
+
+                int itemId = db.itemDAO().getItemId("dummy");
+                listToItem.setItemId(itemId);
+                Log.e("error", "error between");
+                GroceryList list = db.groceryListDAO().find(strings[0]);
+                Log.e("error", "error between 2");
+                listToItem.setListId(list.getListId());
+                Log.e("error", "error after");
+                db.listToItemDAO().insert(listToItem);
+//            Log.e("notherdamnTag",db.listToItemDAO().get(dummy.getListId(), someItem.getItemId()).getItemId()+"");
+//            Log.e("notherdamnTag",db.listToItemDAO().get(dummy.getListId(), someItem.getItemId()).getListId()+"");
+            }
+            catch (Exception e){
+                Log.e("fucking", "Hell" + e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
+
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        @Override
 //        protected void onPreExecute() {

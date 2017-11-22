@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent showListView = new Intent(context, ListUI.class);
                 showListView.putExtra("thisListName", button.getText().toString());
+                Log.e("nahchill", "setting bundle here with" + button.getText().toString());
                 startActivity(showListView);
             }
         };
