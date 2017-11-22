@@ -32,6 +32,17 @@ public class MyTasks {
         new Populate().execute();
     }
 
+    private static boolean itemIsInList;
+    public boolean itemIsInList(String itemName , String listName){
+        try {
+//            String[] s = {itemName, listName};
+            Void wait = new ItemIsInList().execute(itemName,listName).get();
+        } catch (Exception e) {
+            Log.e("Tag", "Error in mytask getLists method");
+        }
+        return itemIsInList;
+    }
+
     private static List<GroceryList> allLists;
 
     public List<GroceryList> getLists() {
@@ -503,6 +514,43 @@ public class MyTasks {
             db.groceryListDAO().delete(list);
             return null;
         }
+    }
+
+    private static class ItemIsInList extends AsyncTask<String, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String itemName = strings[0];
+            String listName = strings[1];
+            try {
+                int itemID = db.itemDAO().getItemId(itemName);
+                GroceryList groceryList = db.groceryListDAO().find(listName);
+
+                int listID = groceryList.getListId();
+                ListToItem listToItem = db.listToItemDAO().get(listID,itemID);
+                if(listToItem != null ){
+                    itemIsInList = true;
+                } else {
+                    itemIsInList = false;
+                }
+            } catch(Exception e){
+                Log.e("mytask tag" , e.getMessage());
+
+            }
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
     }
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        protected void onPreExecute() {
