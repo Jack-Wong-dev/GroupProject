@@ -16,12 +16,14 @@ import java.util.List;
  */
 
 public class UIItemsInType extends AppCompatActivity{
+
     String typeName;
     String listName;
     TextView typeTitle;
     MyTasks myTasks;
     Context context = this;
     LinearLayout llItemsOfType;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class UIItemsInType extends AppCompatActivity{
         }
     }
 
+//    inputs specific item to list also sends a result back to main activity
     View.OnClickListener addToList(final Button button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {

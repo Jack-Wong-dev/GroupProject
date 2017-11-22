@@ -12,6 +12,8 @@ import java.util.List;
  * Created by Lin on 11/15/17.
  */
 
+//List to Item DAO
+
 @Dao
 public interface ListToItemDAO {
 

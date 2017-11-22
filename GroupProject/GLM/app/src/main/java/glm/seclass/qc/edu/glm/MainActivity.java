@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         Intent searchIntent = new Intent(this, SearchEngine.class);
         startActivity(searchIntent);
     }
+
+//    Adds listener for new list buttons so that they can display new views
     View.OnClickListener showListView(final Button button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {

@@ -18,6 +18,7 @@ public class MyTasks {
     private static Context context;
     private static boolean populated = false;
 
+//    All methods that return information or set db info
 
     public MyTasks(Context context) {
         this.context = context;
@@ -156,6 +157,7 @@ public class MyTasks {
         }
     }
 
+//    All db operations that are done on second thread
 
     private static class Populate extends AsyncTask<Void, Void, Void> {
 

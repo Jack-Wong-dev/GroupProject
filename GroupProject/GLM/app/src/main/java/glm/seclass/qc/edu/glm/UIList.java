@@ -44,6 +44,7 @@ public class UIList extends AppCompatActivity {
 
         List<ListToItem> listToItem = myTasks.getListItems(listName);
 
+//        create checkbox textview of item name qty field and x button to delete
         for(int i = 0; i < listToItem.size(); i++){
             Log.e("somewhere", "over");
             LinearLayout horizontalLL = new LinearLayout(this);
@@ -70,7 +71,7 @@ public class UIList extends AppCompatActivity {
         }
         addItem.setOnClickListener(displayTypeScreen(addItem));
     }
-
+//    displays type view from add button
     View.OnClickListener displayTypeScreen(final Button button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,11 +80,11 @@ public class UIList extends AppCompatActivity {
                 showTypeView.putExtra("thisListName", listName);
                 Log.e("tag", "error before startingListview");
                 startActivityForResult(showTypeView, 1);
-//                startActivity(showTypeView);
             }
         };
     }
 
+    // this function updates the items in the list
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);

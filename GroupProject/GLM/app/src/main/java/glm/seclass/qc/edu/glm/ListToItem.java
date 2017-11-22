@@ -8,6 +8,8 @@ import android.arch.persistence.room.ForeignKey;
  * Created by Lin on 11/15/17.
  */
 
+//Table for mapping a list to an item
+
 @Entity(primaryKeys = {
         "list_id", "item_id"
 },
