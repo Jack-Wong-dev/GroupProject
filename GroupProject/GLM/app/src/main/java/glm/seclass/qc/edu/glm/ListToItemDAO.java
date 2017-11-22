@@ -23,6 +23,9 @@ public interface ListToItemDAO {
     @Query("SELECT * FROM ListToItem WHERE list_id = :listId")
     List<ListToItem> getAllItems(int listId);
 
+    @Query("DELETE FROM ListToItem WHERE list_id = :listId")
+    void deleteItems(int listId);
+
     @Insert
     void insertAll(List<ListToItem> listToItems);
 

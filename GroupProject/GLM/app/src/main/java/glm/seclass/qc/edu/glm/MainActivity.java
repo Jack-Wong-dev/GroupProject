@@ -39,18 +39,19 @@ public class MainActivity extends AppCompatActivity {
 
         myTasks = new MyTasks(this);
         myTasks.populateDB();
-        final List<GroceryList> allLists = myTasks.getLists();
+//        final List<GroceryList> allLists = myTasks.getLists();
 
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
-        for(int i = 0; i < allLists.size(); i++){
-            Button button = new Button(context);
-            button.setId(i+1);
-            button.setText(allLists.get(i).getListName());
-            final int finalI = i;
-            button.setOnClickListener(showListView(button));
-            scrollView.addView(button);
-        }
+//        for(int i = 0; i < allLists.size(); i++){
+//            Button button = new Button(context);
+//            button.setId(i+1);
+//            button.setText(allLists.get(i).getListName());
+//            final int finalI = i;
+//            button.setOnClickListener(showListView(button));
+//            scrollView.addView(button);
+//        }
+        update();
         createList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void displaySearchScreen (View view){
         Intent searchIntent = new Intent(this, SearchEngine.class);
-        startActivity(searchIntent);
+        startActivityForResult(searchIntent, 1);
+//        startActivity(searchIntent);
     }
 
 //    Adds listener for new list buttons so that they can display new views
@@ -117,9 +119,31 @@ public class MainActivity extends AppCompatActivity {
                 Intent showListView = new Intent(context, UIList.class);
                 showListView.putExtra("thisListName", button.getText().toString());
                 Log.e("nahchill", "setting bundle here with" + button.getText().toString());
-                startActivity(showListView);
+//                startActivity(showListView);
+                startActivityForResult(showListView, 1);
             }
         };
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode ==1) {
+            update();
+        }
+    }
+
+    public void update(){
+        scrollView.removeAllViews();
+        final List<GroceryList> allLists = myTasks.getLists();
+        for(int i = 0; i < allLists.size(); i++){
+            Button button = new Button(context);
+            button.setId(i+1);
+            button.setText(allLists.get(i).getListName());
+            final int finalI = i;
+            button.setOnClickListener(showListView(button));
+            scrollView.addView(button);
+        }
     }
 }
 

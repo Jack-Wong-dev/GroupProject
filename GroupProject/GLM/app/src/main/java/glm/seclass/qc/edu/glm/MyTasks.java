@@ -146,7 +146,6 @@ public class MyTasks {
         return itemsOfType;
     }
 
-//    myTasks.insertToList(listName, button.getText().toString());
     public static void insertToList(String listName, String itemName){
         try {
 
@@ -154,6 +153,15 @@ public class MyTasks {
         }
         catch (Exception e){
             Log.e("tag", "error in inserToList method myTask");
+        }
+    }
+
+    public static  void deleteList(String listName){
+        try {
+            Void wait = new DeleteList().execute(listName).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "error in deleteList method mytask");
         }
     }
 
@@ -462,6 +470,7 @@ public class MyTasks {
         }
 
     }
+
     private static class InsertToList extends AsyncTask<String, Void, Void>{
         protected void onPreExecute() {
             super.onPreExecute();
@@ -483,6 +492,17 @@ public class MyTasks {
             super.onPostExecute(aVoid);
         }
 
+    }
+
+    private static class DeleteList extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected Void doInBackground( String... strings) {
+            GroceryList list = db.groceryListDAO().find(strings[0]);
+            db.listToItemDAO().deleteItems(list.getListId());
+            db.groceryListDAO().delete(list);
+            return null;
+        }
     }
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        protected void onPreExecute() {
