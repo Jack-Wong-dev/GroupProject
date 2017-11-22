@@ -54,6 +54,7 @@ public class SearchEngine extends AppCompatActivity {
 //                listItems.remove(item);
 //            }
 //        }
+
         adapter.notifyDataSetChanged();
     }
     public void initList(){
@@ -65,6 +66,7 @@ public class SearchEngine extends AppCompatActivity {
         myTasks = new MyTasks(this);
 //
         List<Item> itemList = myTasks.getItems();
+
         listItems = new ArrayList<>();
         for(int i = 0; i < itemList.size() ; i++ ){
             listItems.add(itemList.get(i).getItemName());
@@ -72,5 +74,6 @@ public class SearchEngine extends AppCompatActivity {
 //
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
         listView.setAdapter(adapter);
+
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 public class MyTasks {
     private static GLDatabase db;
     private static Context context;
+    private static boolean populated = false;
 
     public MyTasks(Context context) {
         this.context = context;
@@ -22,6 +23,8 @@ public class MyTasks {
     }
 
     public void populateDB() {
+        if(populated) return;
+
         new Populate().execute();
     }
 
@@ -34,6 +37,38 @@ public class MyTasks {
             Log.e("Tag", "Error in mytask getLists method");
         }
         return allLists;
+    }
+
+    private static List<Item> allItems;
+    public List<Item> getItems(){
+        try {
+            Void wait = new GetItems().execute().get();
+        }
+        catch (Exception e){
+            Log.e("Tag", "Error in mytask getLists method");
+        }
+        return allItems;
+    }
+
+    private static class GetItems extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //Perform pre-adding operation here.
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            allItems = db.itemDAO().getAllItems();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void params) {
+            super.onPostExecute(params);
+        }
     }
 
     private static Boolean found;
@@ -95,16 +130,6 @@ public class MyTasks {
         return listOfItemsFromSearch;
     }
 
-    private static List<Item> allItems;
-
-    public static List<Item> getItems() {
-        try {
-            Void wait = new GetItems().execute().get();
-        } catch (Exception e) {
-            Log.e("Tag", "Error in mytask getLists method");
-        }
-        return allItems;
-    }
 
     public static void populateList(String listName){
         try {
@@ -124,16 +149,19 @@ public class MyTasks {
         }
 
         @Override
+
         protected Void doInBackground(Void... params) {
             try {
                 if (!db.itemDAO().getAllItems().isEmpty()) return null;
                 ItemType drinks = new ItemType("Drink", "Ounce");
                 ItemType fruits = new ItemType("Fruit", "Ounce");
                 ItemType meat = new ItemType("Meat", "Ounce");
+
                 List<ItemType> listOfTypes = new ArrayList<>();
                 listOfTypes.add(drinks);
                 listOfTypes.add(fruits);
                 listOfTypes.add(meat);
+
                 long[] typeID = db.itemTypeDAO().insert(listOfTypes.get(0), listOfTypes.get(1), listOfTypes.get(2));
                 String[] drinksAry = {"Sprite", "Coke", "Pepsi", "Fanta", "Vitamin Water", "Gatorade", "Mountain Dew",
                         "Orange Juice", "Water", "Beer"};
@@ -149,6 +177,7 @@ public class MyTasks {
                 }
                 db.itemDAO().insertAll(listOfItems);
             } catch (Exception e) {
+
                 Log.e("Tag", e.getMessage() + "Error in populate async dib");
             }
             return null;
@@ -156,6 +185,7 @@ public class MyTasks {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            populated = true;
             super.onPostExecute(aVoid);
         }
     }
@@ -256,24 +286,7 @@ public class MyTasks {
 
     }
 
-    private static class GetItems extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            //Perform pre-adding operation here.
-        }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-            allItems = db.itemDAO().getAllItems();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void params) {
-            super.onPostExecute(params);
-        }
-    }
 
     private static class GetListItems extends AsyncTask<String, Void, Void>{
         @Override
