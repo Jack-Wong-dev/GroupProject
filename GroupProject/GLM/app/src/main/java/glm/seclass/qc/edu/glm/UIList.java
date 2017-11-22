@@ -21,6 +21,7 @@ import java.util.List;
 public class UIList extends AppCompatActivity {
     Button addItem;
     Button deleteThisList;
+    Button searchForItem;
     LinearLayout llList;
     MyTasks myTasks;
     String listName;
@@ -73,12 +74,21 @@ public class UIList extends AppCompatActivity {
 
         addItem.setOnClickListener(displayTypeScreen(addItem));
 
+
         deleteThisList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myTasks.deleteList(listName);
                 setResult(1);
                 finish();
+            }
+        });
+        searchForItem = findViewById(R.id.search_btn);
+        searchForItem.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent searchEngine = new Intent(context , SearchEngine.class);
+                startActivity(searchEngine);
             }
         });
     }
