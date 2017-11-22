@@ -106,13 +106,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void displaySearchScreen (View view){
-        Intent search_intent = new Intent(this, SearchEngine.class);
-        startActivity(search_intent);
+        Intent searchIntent = new Intent(this, SearchEngine.class);
+        startActivity(searchIntent);
     }
     View.OnClickListener showListView(final Button button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                Intent showListView = new Intent(context, ListUI.class);
+                Intent showListView = new Intent(context, UIList.class);
                 showListView.putExtra("thisListName", button.getText().toString());
                 Log.e("nahchill", "setting bundle here with" + button.getText().toString());
                 startActivity(showListView);

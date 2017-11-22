@@ -8,6 +8,9 @@ import android.support.annotation.NonNull;
 /**
  * Created by Lin on 11/13/17.
  */
+
+//List table
+
 @Entity
 public class GroceryList {
 

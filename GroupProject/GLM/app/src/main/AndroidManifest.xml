@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchEngine"></activity>
-        <activity android:name=".ListUI"></activity>
+        <activity android:name=".UIList"></activity>
+        <activity android:name=".UIType"></activity>
+        <activity android:name=".UIItemsInType"></activity>
     </application>
 
 </manifest>

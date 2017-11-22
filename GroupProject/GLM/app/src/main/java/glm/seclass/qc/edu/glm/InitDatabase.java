@@ -2,13 +2,11 @@ package glm.seclass.qc.edu.glm;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.util.Log;
-
-import java.util.List;
-import java.util.ArrayList;
 /**
  * Created by Lin on 11/15/17.
  */
+
+//singleton for db
 
 public class InitDatabase{
 

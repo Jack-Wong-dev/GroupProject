@@ -31,6 +31,9 @@ public interface ItemDAO {
     @Query("SELECT * FROM Item WHERE item_name = :itemName")
     int getItemId(String itemName);
 
+    @Query("SELECT * FROM Item WHERE type_id = :typeId")
+    List<Item> getItemsOfType(int typeId);
+
     @Insert
     void insertAll(List<Item> items);
 

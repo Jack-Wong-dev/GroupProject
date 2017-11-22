@@ -9,6 +9,8 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
+//item table
+
 @Entity(foreignKeys = {@ForeignKey(
                             entity = ItemType.class,
                             parentColumns = "type_id",

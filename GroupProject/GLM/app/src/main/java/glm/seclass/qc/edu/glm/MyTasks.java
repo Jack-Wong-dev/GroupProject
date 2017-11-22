@@ -12,9 +12,12 @@ import java.util.List;
  */
 
 public class MyTasks {
+
+
     private static GLDatabase db;
     private static Context context;
     private static boolean populated = false;
+
 
     public MyTasks(Context context) {
         this.context = context;
@@ -50,24 +53,13 @@ public class MyTasks {
         return allItems;
     }
 
-    private static class GetItems extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            //Perform pre-adding operation here.
+    public static void populateList(String listName){
+        try {
+            Log.e("damntag", "list is" + listName);
+            Void wait = new PopulateList().execute(listName).get();
         }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            allItems = db.itemDAO().getAllItems();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void params) {
-            super.onPostExecute(params);
+        catch (Exception e){
+            Log.e("another tag", "error in insert to list method");
         }
     }
 
@@ -119,8 +111,8 @@ public class MyTasks {
         }
         return itemName;
     }
-    private static List<Item> listOfItemsFromSearch;
 
+    private static List<Item> listOfItemsFromSearch;
     public static List<Item> searchSimilarItems() {
         try {
             Void wait = new SearchSimilarItems().execute().get();
@@ -130,24 +122,48 @@ public class MyTasks {
         return listOfItemsFromSearch;
     }
 
+    private static List<ItemType> allItemTypes;
+    public static List<ItemType> getAllTypes(){
+        try{
+            Log.e("tag", "before get all types");
+            Void wait = new GetAllTypes().execute().get();
+            Log.e("tag", "after get all types");
+        }catch (Exception e){
+            Log.e("tagInGetAllTypes", "error in get all types");
+        }
+        return allItemTypes;
+    }
 
-    public static void populateList(String listName){
-        try {
-            Log.e("damntag", "list is" + listName);
-            Void wait = new PopulateList().execute(listName).get();
+    private static List<Item> itemsOfType;
+    public static List<Item> getItemsOfType(String typeName){
+        try{
+            Void wait = new GetItemsOfType().execute(typeName).get();
         }
         catch (Exception e){
-            Log.e("another tag", "error in insert to list method");
+            Log.e("tag", "error in get items of type method in my task");
+        }
+        return itemsOfType;
+    }
+
+//    myTasks.insertToList(listName, button.getText().toString());
+    public static void insertToList(String listName, String itemName){
+        try {
+
+            Void wait = new InsertToList().execute(listName, itemName).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "error in inserToList method myTask");
         }
     }
 
+
     private static class Populate extends AsyncTask<Void, Void, Void> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             //Perform pre-adding operation here.
         }
-
         @Override
 
         protected Void doInBackground(Void... params) {
@@ -188,8 +204,8 @@ public class MyTasks {
             populated = true;
             super.onPostExecute(aVoid);
         }
-    }
 
+    }
     private static class GetLists extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -263,14 +279,14 @@ public class MyTasks {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
         }
-    }
 
+    }
     private static class SearchSimilarItems extends AsyncTask<String, Void, Void> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
-
         @Override
         protected Void doInBackground(String... strings) {
             listItems = db.listToItemDAO().getAllItems(db.groceryListDAO().find(strings[0]).getListId());
@@ -286,14 +302,14 @@ public class MyTasks {
 
     }
 
-
-
     private static class GetListItems extends AsyncTask<String, Void, Void>{
+
+
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
-
         @Override
         protected Void doInBackground(String... strings) {
             Log.e("tag it here before", "anoter message");
@@ -312,6 +328,7 @@ public class MyTasks {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
         }
+
     }
 
     private static class GetItem extends AsyncTask<Integer, Void, Void>{
@@ -336,11 +353,11 @@ public class MyTasks {
     }
 
     private static class PopulateList extends AsyncTask<String, Void, Void>{
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
-
         @Override
         protected Void doInBackground(String... strings) {
             try{
@@ -384,8 +401,88 @@ public class MyTasks {
 
     }
 
+    private static class GetItems extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //Perform pre-adding operation here.
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            allItems = db.itemDAO().getAllItems();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void params) {
+            super.onPostExecute(params);
+        }
+
+    }
+
+    private static class GetAllTypes extends AsyncTask<Void, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.e("tag", "before get all item type from db");
+            allItemTypes = db.itemTypeDAO().getAll();
+            Log.e("tag", "after get all item type from db");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
+
+    private static class GetItemsOfType extends AsyncTask<String, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            int typeId = db.itemTypeDAO().get(strings[0]);
+            itemsOfType = db.itemDAO().getItemsOfType(typeId);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
+    private static class InsertToList extends AsyncTask<String, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            ListToItem listToItem = new ListToItem();
+            int listId = db.groceryListDAO().find(strings[0]).getListId();
+            listToItem.setListId(listId);
+            int itemId = db.itemDAO().getItemId(strings[1]);
+            listToItem.setItemId(itemId);
+            db.listToItemDAO().insert(listToItem);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
-//        @Override
 //        protected void onPreExecute() {
 //            super.onPreExecute();
 //        }

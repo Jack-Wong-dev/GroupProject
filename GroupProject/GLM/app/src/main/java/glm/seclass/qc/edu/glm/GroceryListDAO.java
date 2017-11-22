@@ -12,6 +12,8 @@ import java.util.List;
  * Created by Lin on 11/13/17.
  */
 
+//SQL queries for grocery lists
+
 @Dao
 public interface GroceryListDAO {
 
