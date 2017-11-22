@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -39,18 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         myTasks = new MyTasks(this);
         myTasks.populateDB();
-//        final List<GroceryList> allLists = myTasks.getLists();
+
 
         scrollView = (LinearLayout) findViewById(R.id.MainLayout);
 
-//        for(int i = 0; i < allLists.size(); i++){
-//            Button button = new Button(context);
-//            button.setId(i+1);
-//            button.setText(allLists.get(i).getListName());
-//            final int finalI = i;
-//            button.setOnClickListener(showListView(button));
-//            scrollView.addView(button);
-//        }
         update();
         createList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
     public void displaySearchScreen (View view){
         Intent searchIntent = new Intent(this, SearchEngine.class);
         startActivityForResult(searchIntent, 1);
-//        startActivity(searchIntent);
     }
 
 //    Adds listener for new list buttons so that they can display new views
@@ -118,8 +108,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent showListView = new Intent(context, UIList.class);
                 showListView.putExtra("thisListName", button.getText().toString());
-                Log.e("nahchill", "setting bundle here with" + button.getText().toString());
-//                startActivity(showListView);
+
                 startActivityForResult(showListView, 1);
             }
         };

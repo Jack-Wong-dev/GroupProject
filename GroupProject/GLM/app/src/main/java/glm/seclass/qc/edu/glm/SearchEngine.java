@@ -10,7 +10,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 public class SearchEngine extends AppCompatActivity {
-    String[] items;
+
     ArrayList<String> listItems;
     ArrayAdapter<String> adapter;
     ListView listView;
@@ -49,29 +49,19 @@ public class SearchEngine extends AppCompatActivity {
                 listItems.remove(item);
             }
         }
-//        for(String item:listItems){
-//            if(!item.toLowerCase().contains(textToSearch.toString().toLowerCase())){
-//                listItems.remove(item);
-//            }
-//        }
 
         adapter.notifyDataSetChanged();
     }
     public void initList(){
-//        items = new String[]{"Pen", "Pineapple", "Apple", "Pen Pineapple Apple Pen", "Eggs", "Bacon",
-//                "Banana", "Coconut","Durian", "Eggfruit", "Fig", "Grapefruit",
-//                "Honeydew Melon", "Indian Fig", "Jackfruit", "Kiwi", "Lemon", "Mango", "Nectarine",
-//                "Peach", "Quince", "Raspberries", "Strawberries", "Tomato", "Ugni", "Watermelon" };
-//        listItems= new ArrayList<>(Arrays.asList(items));
         myTasks = new MyTasks(this);
-//
+
         List<Item> itemList = myTasks.getItems();
 
         listItems = new ArrayList<>();
         for(int i = 0; i < itemList.size() ; i++ ){
             listItems.add(itemList.get(i).getItemName());
         }
-//
+
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
         listView.setAdapter(adapter);
 

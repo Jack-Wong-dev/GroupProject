@@ -36,6 +36,7 @@ public class MyTasks {
 
     public List<GroceryList> getLists() {
         try {
+//            this makes main thread wait for new thread to finish
             Void wait = new GetLists().execute().get();
         } catch (Exception e) {
             Log.e("Tag", "Error in mytask getLists method");
@@ -56,7 +57,6 @@ public class MyTasks {
 
     public static void populateList(String listName){
         try {
-            Log.e("damntag", "list is" + listName);
             Void wait = new PopulateList().execute(listName).get();
         }
         catch (Exception e){
@@ -68,12 +68,10 @@ public class MyTasks {
 
     public Boolean findExistingList(String listName) {
         try {
-//            this makes main thread wait for new thread to finish
             Void wait = new FindList().execute(listName).get();
         } catch (Exception e) {
             Log.e("Tag", "Error in mytaskfind");
         }
-        Log.e("Tag", found.toString() + " is value of found");
         return found;
     }
 
@@ -89,15 +87,12 @@ public class MyTasks {
     private static List<ListToItem> listItems;
     public static List<ListToItem> getListItems(String listName){
         try{
-            Log.e("generictag", "genmessage");
-            Log.e("mydamntag" ,listName);
-            Log.e("generictag", "genmessage after");
             Void wait = new GetListItems().execute(listName).get();
-            Log.e("newTag", "hello");
+
         }
         catch (Exception e){
             Log.e("Some tag", "error in get listItems method in my task");
-            Log.e("hello tag", e.getMessage());
+
         }
         return listItems;
     }
@@ -108,7 +103,7 @@ public class MyTasks {
             Void wait = new GetItem().execute(itemId).get();
         }
         catch (Exception e){
-            Log.e("Yet another tag", "something went wrong getting item in mytask method");
+            Log.e("tag", "something went wrong getting item in mytask method");
         }
         return itemName;
     }
@@ -126,11 +121,11 @@ public class MyTasks {
     private static List<ItemType> allItemTypes;
     public static List<ItemType> getAllTypes(){
         try{
-            Log.e("tag", "before get all types");
+
             Void wait = new GetAllTypes().execute().get();
-            Log.e("tag", "after get all types");
+
         }catch (Exception e){
-            Log.e("tagInGetAllTypes", "error in get all types");
+            Log.e("Tag", "error in get all types");
         }
         return allItemTypes;
     }
@@ -162,6 +157,15 @@ public class MyTasks {
         }
         catch (Exception e){
             Log.e("tag", "error in deleteList method mytask");
+        }
+    }
+
+    public static void deleteItemFromList(String listName, String itemName){
+        try{
+            Void wait = new DeleteItemFromList().execute(listName, itemName).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "error in deleteItemFromList");
         }
     }
 
@@ -216,12 +220,12 @@ public class MyTasks {
         }
 
     }
+
     private static class GetLists extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             //Perform pre-adding operation here.
         }
 
@@ -250,15 +254,14 @@ public class MyTasks {
 
         @Override
         protected Void doInBackground(String... name) {
-            Log.e("newtag", "message in dib for find");
+
             GroceryList listCandidate = db.groceryListDAO().find(name[0]);
-//            Log.e("newtag", "message in dib for find after search value " + listCandidate.toString());
+
             if (listCandidate != null) {
                 found = true;
             } else {
                 found = false;
             }
-            Log.e("tag", "found is " + found.toString());
             return null;
         }
 
@@ -291,6 +294,7 @@ public class MyTasks {
         }
 
     }
+
     private static class SearchSimilarItems extends AsyncTask<String, Void, Void> {
 
         @Override
@@ -322,15 +326,10 @@ public class MyTasks {
         }
         @Override
         protected Void doInBackground(String... strings) {
-            Log.e("tag it here before", "anoter message");
             String listName = strings[0];
-            Log.e("tagithere", "please print here " + listName);
             GroceryList list = db.groceryListDAO().find(listName);
-            Log.e("tag", "It could be crashing here" + list.getListName());
             int listId = list.getListId();
-            Log.e("newtag", "Hello");
             listItems = db.listToItemDAO().getAllItems(listId);
-            Log.e("tag it here", strings[0]);
             return null;
         }
 
@@ -371,35 +370,23 @@ public class MyTasks {
         @Override
         protected Void doInBackground(String... strings) {
             try{
-                Log.e("Hello", "duuuuuuude");
                 ItemType newType = new ItemType("dummyType", "dummy oz");
                 db.itemTypeDAO().insert(newType);
 
-                Log.e("abreak","mannnn");
                 int typeId = db.itemTypeDAO().get("dummyType");
-                Log.e("give", ""+typeId);
                 Item someItem = new Item("dummy", typeId);
-                Log.e("annoyed","godamn");
                 db.itemDAO().insert(someItem);
-                Log.e("newerror","wtf");
-                Log.e("error", "ova hea");
-                Log.e("godDamnTag", "blah");
 
                 ListToItem listToItem = new ListToItem();
 
                 int itemId = db.itemDAO().getItemId("dummy");
                 listToItem.setItemId(itemId);
-                Log.e("error", "error between");
                 GroceryList list = db.groceryListDAO().find(strings[0]);
-                Log.e("error", "error between 2");
                 listToItem.setListId(list.getListId());
-                Log.e("error", "error after");
                 db.listToItemDAO().insert(listToItem);
-//            Log.e("notherdamnTag",db.listToItemDAO().get(dummy.getListId(), someItem.getItemId()).getItemId()+"");
-//            Log.e("notherdamnTag",db.listToItemDAO().get(dummy.getListId(), someItem.getItemId()).getListId()+"");
             }
             catch (Exception e){
-                Log.e("fucking", "Hell" + e.getMessage());
+                Log.e("Tag", " error in dib Populate" + e.getMessage());
             }
             return null;
         }
@@ -439,9 +426,7 @@ public class MyTasks {
 
         @Override
         protected Void doInBackground(Void... params) {
-            Log.e("tag", "before get all item type from db");
             allItemTypes = db.itemTypeDAO().getAll();
-            Log.e("tag", "after get all item type from db");
             return null;
         }
 
@@ -504,6 +489,18 @@ public class MyTasks {
             return null;
         }
     }
+
+    private static class DeleteItemFromList extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected Void doInBackground( String... strings) {
+            int listId = db.groceryListDAO().find(strings[0]).getListId();
+            int itemId = db.itemDAO().getItemId(strings[1]);
+            db.listToItemDAO().delete(db.listToItemDAO().get(listId, itemId));
+            return null;
+        }
+    }
+////    Tempplate for asyncTask
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        protected void onPreExecute() {
 //            super.onPreExecute();
