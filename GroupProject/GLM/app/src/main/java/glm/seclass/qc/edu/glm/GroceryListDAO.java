@@ -23,6 +23,12 @@ public interface GroceryListDAO {
     @Query("SELECT * FROM GroceryList WHERE list_name = :listName")
     GroceryList find(String listName);
 
+    @Query("UPDATE GroceryList SET list_name = :listName WHERE list_id LIKE :listID")
+    void rename(int listID , String listName);
+
+    @Query("SELECT list_id FROM GroceryList WHERE list_name = :listName")
+    int getID(String listName);
+
     @Insert
     void insert(GroceryList list);
 
