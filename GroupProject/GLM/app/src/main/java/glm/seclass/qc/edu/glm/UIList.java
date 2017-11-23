@@ -28,18 +28,17 @@ import java.util.List;
 
 public class UIList extends AppCompatActivity {
 
-    /**
 
      FloatingActionMenu materialDesignFAM;
     FloatingActionButton addItem;
     FloatingActionButton deleteThisList;
     FloatingActionButton searchForItem;
-     **/
+    FloatingActionButton renameThisList; // @+id/rename_btn
+    
 
-
-    Button addItem;
-    Button deleteThisList;
-    Button searchForItem;
+//    Button addItem;
+//    Button deleteThisList;
+//    Button searchForItem;
     LinearLayout llList;
     MyTasks myTasks;
     String listName;
@@ -54,8 +53,8 @@ public class UIList extends AppCompatActivity {
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        addItem = findViewById(R.id.add_btn);
-        deleteThisList = findViewById(R.id.delete_btn);
+        addItem = (FloatingActionButton) findViewById(R.id.add_btn);
+        deleteThisList = (FloatingActionButton) findViewById(R.id.delete_btn);
         llList = findViewById(R.id.ListLayout);
         llList.setFocusable(true);
         llList.setFocusableInTouchMode(true);
@@ -89,7 +88,7 @@ public class UIList extends AppCompatActivity {
         });
     }
 //    displays type view from add button
-    View.OnClickListener displayTypeScreen(final Button button)  {
+    View.OnClickListener displayTypeScreen(final FloatingActionButton button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 Intent showTypeView = new Intent(context, UIType.class);
