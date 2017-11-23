@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -48,9 +49,17 @@ public class UIItemsInType extends AppCompatActivity{
         return new View.OnClickListener() {
             public void onClick(View v) {
 
-                myTasks.insertToList(listName, button.getText().toString());
-                setResult(1);
-                finish();
+                if(myTasks.itemIsInList(listName, button.getText().toString())){
+                    CharSequence text = button.getText().toString() + " is already in " + listName;
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                else{
+                    myTasks.insertToList(listName, button.getText().toString());
+                    setResult(1);
+                    finish();
+                }
             }
         };
     }

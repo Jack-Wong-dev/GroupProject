@@ -73,7 +73,7 @@ public class UIList extends AppCompatActivity {
             public void onClick(View v) {
                 Intent searchEngine = new Intent(context , SearchEngine.class);
                 searchEngine.putExtra("listName" , listName);
-                //startActivity(searchEngine);
+
                 startActivityForResult(searchEngine , 1);
             }
         });
