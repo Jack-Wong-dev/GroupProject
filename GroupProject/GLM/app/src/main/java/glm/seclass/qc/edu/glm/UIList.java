@@ -110,7 +110,15 @@ public class UIList extends AppCompatActivity {
 
                                         String userText = userInput.getText().toString();
 
-                                        if(myTasks.findExistingList(userText)){
+                                        if (userText.isEmpty()) {
+                                            CharSequence text = "Please enter a list name";
+                                            int duration = Toast.LENGTH_SHORT;
+                                            Toast toast = Toast.makeText(context, text, duration);
+                                            toast.show();
+                                        }
+
+
+                                        else if(myTasks.findExistingList(userText)){
                                             CharSequence text = "That list already exists!";
                                             int duration = Toast.LENGTH_SHORT;
                                             Toast toast = Toast.makeText(context, text, duration);
