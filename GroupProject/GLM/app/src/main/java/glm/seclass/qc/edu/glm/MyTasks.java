@@ -219,6 +219,16 @@ public class MyTasks {
         }
     }
 
+
+    public static void updateListToItem(List<ListToItem> listToItem){
+        try {
+            Void wait = new UpdateListToItems().execute(listToItem).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "error in updateListToItem");
+        }
+    }
+
 //    All db operations that are done on second thread
 
     private static class Populate extends AsyncTask<Void, Void, Void> {
@@ -621,6 +631,18 @@ public class MyTasks {
         protected Void doInBackground(ListToItem ... listToItems) {
 
             db.listToItemDAO().update(listToItems[0]);
+
+            return null;
+        }
+    }
+
+    private static class UpdateListToItems extends AsyncTask<List<ListToItem>, Void, Void>{
+        @Override
+        protected Void doInBackground(List<ListToItem> ... listToItems) {
+
+            for(int i = 0; i < listToItems[0].size(); i++){
+                db.listToItemDAO().update(listToItems[0].get(i));
+            }
 
             return null;
         }

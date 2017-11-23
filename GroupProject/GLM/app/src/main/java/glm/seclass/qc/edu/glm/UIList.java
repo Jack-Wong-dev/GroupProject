@@ -17,9 +17,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
-
 import java.util.List;
 
 /**
@@ -40,6 +37,7 @@ public class UIList extends AppCompatActivity {
     Button addItem;
     Button deleteThisList;
     Button searchForItem;
+    Button unCheckAll;
     LinearLayout llList;
     MyTasks myTasks;
     String listName;
@@ -56,6 +54,7 @@ public class UIList extends AppCompatActivity {
 
         addItem = findViewById(R.id.add_btn);
         deleteThisList = findViewById(R.id.delete_btn);
+        unCheckAll = findViewById(R.id.uncheckall);
         llList = findViewById(R.id.ListLayout);
         llList.setFocusable(true);
         llList.setFocusableInTouchMode(true);
@@ -66,6 +65,20 @@ public class UIList extends AppCompatActivity {
         listName = bundle.getString("thisListName");
         title.setText(listName);
         update();
+
+        unCheckAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<ListToItem> listToItems = myTasks.getListItems(listName);
+                for(int i = 0; i < listToItems.size(); i++){
+                    if (listToItems.get(i).getCheckedOff() == true){
+                        listToItems.get(i).setCheckedOff(false);
+                    }
+                }
+                myTasks.updateListToItem(listToItems);
+                update();
+            }
+        });
 
         addItem.setOnClickListener(displayTypeScreen(addItem));
 
@@ -141,6 +154,7 @@ public class UIList extends AppCompatActivity {
             editTextQuantity.getNextFocusUpId();
             editTextQuantity.setImeOptions(EditorInfo.IME_ACTION_DONE);
             editTextQuantity.setText("" +myTasks.getQty(listToItem.get(i)));
+
             final int j = i;
             editTextQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
@@ -166,8 +180,6 @@ public class UIList extends AppCompatActivity {
             deleteItem.setBackgroundColor(Color.parseColor("#FFC0CB"));
 
 
-
-
             deleteItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -188,6 +200,7 @@ public class UIList extends AppCompatActivity {
             }
         };
     }
+
 }
 
 

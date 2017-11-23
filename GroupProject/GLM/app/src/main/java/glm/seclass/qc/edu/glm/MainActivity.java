@@ -43,16 +43,11 @@ public class MainActivity extends AppCompatActivity {
 //        return;
         destroy = findViewById(R.id.destroyDB);
         createList = findViewById(R.id.createList);
-        //search = findViewById(R.id.search);
-
 
 
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         destroy = (FloatingActionButton) findViewById(R.id.destroyDB);
         createList = (FloatingActionButton) findViewById(R.id.createList);
-        //search = (FloatingActionButton) findViewById(R.id.search);
-
-
 
 
         myTasks = new MyTasks(this);

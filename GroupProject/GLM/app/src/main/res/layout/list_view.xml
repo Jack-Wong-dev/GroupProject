@@ -53,4 +53,13 @@
         android:layout_alignStart="@+id/listname"
         android:text="SEARCH" />
 
+    <Button
+        android:id="@+id/uncheckall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/search_btn"
+        android:text="U" />
+
 </RelativeLayout>
