@@ -32,6 +32,26 @@ public class MyTasks {
         new Populate().execute();
     }
 
+    public void insertItemOfType(String itemName , String typeName){
+        try {
+//            String[] s = {itemName, listName};
+            Void wait = new InsertItemOfType().execute(itemName , typeName).get();
+        } catch (Exception e) {
+            Log.e("Tag", "Error in mytask getLists method");
+        }
+
+    }
+
+    private static boolean itemExists;
+    public boolean itemExists(String itemName){
+        try {
+//            String[] s = {itemName, listName};
+            Void wait = new ItemExists().execute(itemName).get();
+        } catch (Exception e) {
+            Log.e("Tag", "Error in itemExists getLists method");
+        }
+        return itemExists;
+    }
     private static boolean itemIsInList;
     public static boolean itemIsInList(String listName , String itemName){
         try {
@@ -553,6 +573,67 @@ public class MyTasks {
 
     }
 
+    private static class ItemExists extends AsyncTask<String, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String itemName = strings[0];
+
+            try {
+                Item item = db.itemDAO().getItemWithName(itemName);
+                if(item == null ){
+                    itemExists = false;
+                    return null;
+                }
+                if(item.getItemName().isEmpty()){
+                    itemExists = false;
+                    Log.e("null " , "isNull");
+                } else{
+                    itemExists = true;
+                    Log.e("notnull" , "notnull");
+                    Log.e("name" , item.getItemName());
+                }
+
+            } catch(Exception e){
+                Log.e("mytask tag" , e.getMessage());
+
+            }
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
+    private static class InsertItemOfType extends AsyncTask<String, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String itemName = strings[0];
+            String typeName = strings[1];
+            Log.e("fklsdjfldk" , itemName);
+            int typeID = db.itemTypeDAO().get(typeName);
+            db.itemDAO().insert(new Item(itemName , typeID));
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        protected void onPreExecute() {
 //            super.onPreExecute();
