@@ -26,12 +26,16 @@ public class ListToItem {
     @ColumnInfo(name = "item_id")
     private int itemId;
 
-//    @ColumnInfo(name = "checked_off")
-//    private Boolean checkedOff;
+    @ColumnInfo(name = "checked_off")
+    private Boolean checkedOff;
 
-//    public ListToItem(){
-//        checkedOff = false;
-//    }
+    @ColumnInfo(name = "quantity")
+    private int quantity;
+
+    public ListToItem(){
+        checkedOff = false;
+        quantity = 1;
+    }
 
     public int getListId() {
         return listId;
@@ -47,5 +51,21 @@ public class ListToItem {
 
     public void setItemId(int itemId) {
         this.itemId = itemId;
+    }
+
+    public Boolean getCheckedOff() {
+        return checkedOff;
+    }
+
+    public void setCheckedOff(Boolean checkedOff) {
+        this.checkedOff = checkedOff;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

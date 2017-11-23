@@ -23,6 +23,9 @@ public interface ItemTypeDAO {
     @Query("SELECT * FROM ItemType WHERE item_type = :itemType")
     int get(String itemType);
 
+    @Query("SELECT * FROM ItemType WHERE type_id = :typeId")
+    ItemType getItemType(int typeId);
+
     @Insert
     long[] insert(ItemType... itemtype);
     @Insert
