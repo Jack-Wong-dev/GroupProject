@@ -1,13 +1,17 @@
 package glm.seclass.qc.edu.glm;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -50,12 +55,13 @@ public class UIList extends AppCompatActivity {
         setContentView(R.layout.list_view);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+        myTasks = new MyTasks(context);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         unCheckAll = (FloatingActionButton) findViewById(R.id.uncheckall);
         addItem = (FloatingActionButton) findViewById(R.id.add_btn);
         deleteThisList = (FloatingActionButton) findViewById(R.id.delete_btn);
         searchForItem = (FloatingActionButton) findViewById(R.id.search_btn);
+        renameThisList = (FloatingActionButton) findViewById(R.id.rename_btn);
         title = findViewById(R.id.listname);
         llList = findViewById(R.id.ListLayout);
 
@@ -83,6 +89,64 @@ public class UIList extends AppCompatActivity {
         });
 
         addItem.setOnClickListener(displayTypeScreen(addItem));
+
+        renameThisList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = LayoutInflater.from(context);
+                View promptsView = layoutInflater.inflate(R.layout.rename_prompt, null);
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setView(promptsView);
+                final EditText userInput = (EditText) promptsView.findViewById(R.id.newListName);
+                userInput.clearFocus();
+                userInput.setSingleLine(true);
+
+                alert
+                        .setCancelable(false)
+                        .setPositiveButton("Rename",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        String userText = userInput.getText().toString();
+
+                                        if (userText.isEmpty()) {
+                                            CharSequence text = "Please enter a list name";
+                                            int duration = Toast.LENGTH_SHORT;
+                                            Toast toast = Toast.makeText(context, text, duration);
+                                            toast.show();
+                                        }
+
+
+                                        else if(myTasks.findExistingList(userText)){
+                                            CharSequence text = "That list already exists!";
+                                            int duration = Toast.LENGTH_SHORT;
+                                            Toast toast = Toast.makeText(context, text, duration);
+                                            toast.show();
+                                        }
+                                        else{
+                                            Log.e("Else" , "else is ran");
+                                            myTasks.renameList(listName , userText);
+                                            listName = userText;
+                                            Log.d("List name is " , listName);
+                                            title.setText(listName);
+                                            update();
+                                        }
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                }
+                        );
+
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+            }
+        });
 
         deleteThisList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +197,8 @@ public class UIList extends AppCompatActivity {
         final List<ListToItem> listToItem = myTasks.getListItems(listName);
 
         for(int i = 0; i < listToItem.size(); i++){
+
+
 
             LinearLayout horizontalLL = new LinearLayout(this);
             horizontalLL.setOrientation(LinearLayout.HORIZONTAL);
@@ -189,6 +255,7 @@ public class UIList extends AppCompatActivity {
                 }
             });
             horizontalLL.addView(deleteItem);
+
             llList.addView(horizontalLL);
         }
     }

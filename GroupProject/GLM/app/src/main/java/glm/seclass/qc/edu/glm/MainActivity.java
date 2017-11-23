@@ -20,7 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionMenu materialDesignFAM;
+   // FloatingActionMenu materialDesignFAM;
     FloatingActionButton destroy;
     FloatingActionButton createList;
     FloatingActionButton search;
@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        InitDatabase.destroy(this);
 //        return;
-        destroy = findViewById(R.id.destroyDB);
+       // destroy = findViewById(R.id.destroyDB);
         createList = findViewById(R.id.createList);
 
 
-        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-        destroy = (FloatingActionButton) findViewById(R.id.destroyDB);
+     //   materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+     //   destroy = (FloatingActionButton) findViewById(R.id.destroyDB);
         createList = (FloatingActionButton) findViewById(R.id.createList);
 
 
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 userInput.clearFocus();
                 userInput.setSingleLine(true);
 
+
                 alert
                         .setCancelable(false)
                         .setPositiveButton("Create",
@@ -77,7 +78,14 @@ public class MainActivity extends AppCompatActivity {
 
                                         String userText = userInput.getText().toString();
 
-                                        if(myTasks.findExistingList(userText)){
+                                        if (userText.isEmpty()) {
+                                            CharSequence text = "Please enter a list name";
+                                            int duration = Toast.LENGTH_SHORT;
+                                            Toast toast = Toast.makeText(context, text, duration);
+                                            toast.show();
+                                        }
+
+                                        else if(myTasks.findExistingList(userText)){
                                             CharSequence text = "That list already exists!";
                                             int duration = Toast.LENGTH_SHORT;
                                             Toast toast = Toast.makeText(context, text, duration);
@@ -105,12 +113,12 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-        destroy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                InitDatabase.destroy(context);
-            }
-        });
+//        destroy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                InitDatabase.destroy(context);
+//            }
+//        });
     }
 
 //    Adds listener for new list buttons so that they can display new views

@@ -32,6 +32,16 @@ public class MyTasks {
         new Populate().execute();
     }
 
+    public void renameList(String listName, String newListName){
+        try {
+//            String[] s = {itemName, listName};
+            Void wait = new RenameList().execute(listName , newListName).get();
+        } catch (Exception e) {
+            Log.e("Tag", "Error in mytask getLists method");
+        }
+    }
+
+
     public void insertItemOfType(String itemName , String typeName){
         try {
 //            String[] s = {itemName, listName};
@@ -754,7 +764,30 @@ public class MyTasks {
         }
     }
 
+    private static class RenameList extends AsyncTask<String, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
+        @Override
+        protected Void doInBackground(String... strings) {
+            String listName = strings[0];
+            Log.e("listname is " , listName);
+            String newListName = strings[1];
+            int listID = db.groceryListDAO().getID(listName);
+            db.groceryListDAO().rename(listID , newListName);
+
+            Log.e("list id is " , Integer.toString(listID));
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
 //    Template for asyncTask
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        protected void onPreExecute() {
