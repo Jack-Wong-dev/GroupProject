@@ -114,8 +114,10 @@ public class MyTasks {
         }
     }
 
-    private static List<ListToItem> listItems;
+    private static List<ListToItem> listItemsList;
+
     public static List<ListToItem> getListItems(String listName){
+
         try{
             Void wait = new GetListItems().execute(listName).get();
 
@@ -124,7 +126,7 @@ public class MyTasks {
             Log.e("Some tag", "error in get listItems method in my task");
 
         }
-        return listItems;
+        return listItemsList;
     }
 
     private static String itemName;
@@ -138,6 +140,7 @@ public class MyTasks {
         return itemName;
     }
 
+    private static List<ListToItem> listItems;
     private static List<Item> listOfItemsFromSearch;
     public static List<Item> searchSimilarItems() {
         try {
@@ -397,19 +400,39 @@ public class MyTasks {
     }
 
     private static class GetListItems extends AsyncTask<String, Void, Void>{
-
-
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
+
         @Override
         protected Void doInBackground(String... strings) {
-            String listName = strings[0];
-            GroceryList list = db.groceryListDAO().find(listName);
-            int listId = list.getListId();
-            listItems = db.listToItemDAO().getAllItems(listId);
+            try{
+                String listName = strings[0];
+                GroceryList list = db.groceryListDAO().find(listName);
+
+                int listId = list.getListId();
+
+                List<ListToItem> temp = db.listToItemDAO().getAllItems(listId);
+
+                List<ItemType> itemTypes = db.itemTypeDAO().getAll();
+
+
+                ArrayList<ListToItem> temp2 = new ArrayList<>();
+
+                for(int j = 0; j < itemTypes.size(); j++){
+                    for(int i = 0; i < temp.size(); i++){
+                        if(itemTypes.get(j).getTypeId() == db.itemDAO().getItem(temp.get(i).getItemId()).getTypeId()){
+                            temp2.add(temp.get(i));
+                        }
+                    }
+                }
+                listItemsList = temp2;
+            }
+            catch (Exception e){
+                Log.e("tag", "Error in async task" + e.getMessage());
+            }
+
             return null;
         }
 

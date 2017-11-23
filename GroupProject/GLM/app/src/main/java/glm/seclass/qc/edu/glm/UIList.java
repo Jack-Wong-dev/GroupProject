@@ -125,8 +125,10 @@ public class UIList extends AppCompatActivity {
     }
 
     public void update(){
-
+        materialDesignFAM.close(true);
         llList.removeAllViews();
+
+
 
         final List<ListToItem> listToItem = myTasks.getListItems(listName);
 
@@ -179,8 +181,6 @@ public class UIList extends AppCompatActivity {
             deleteItem.setText("Delete");
             deleteItem.setTextColor(Color.WHITE);
             deleteItem.setBackgroundColor(Color.parseColor("#FFC0CB"));
-
-
             deleteItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
