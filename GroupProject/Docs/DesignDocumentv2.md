@@ -39,16 +39,13 @@ A diagram displaying where the components would be deployed is unreasonable beca
 
 ## 3 Low-Level Diagram
 
-
 ### 3.1 Class Diagram
-
 ![Design-Team](images/design-teamv4.png)
-
 
 ## 4 User Interface Diagram
 
 
-![Start Screen](images/Mockup-User-Default.png) ![User Options](images/Mockup-User-Options.png) 
-![Grocery List](images/Mockup-GroceryList-State1.png) ![Select Item Type](images/Mockup-GroceryList-State2.png)
+![Start Screen](images/AppImages/BlankPage.png) ![User Options](images/AppImages/ListContents.png) 
+![NewGrocery List](images/AppImages/CreateNewList.png) 
 
-[Video Link](https://drive.google.com/open?id=1Rt0HN0oYy50u2Q0CKvZqydzziEVmp4v-)
+
