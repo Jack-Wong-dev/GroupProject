@@ -27,8 +27,11 @@ public class SearchEngine extends AppCompatActivity {
     EditText editText;
     MyTasks myTasks;
     String listName;
+    Button addItemBtn;
     Context context = this;
+    String type, itemName;
     String addNewItemText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,8 @@ public class SearchEngine extends AppCompatActivity {
         setContentView(R.layout.activity_search_engine);
         listView = (ListView) findViewById(R.id.listview);
         editText = (EditText) findViewById(R.id.txtsearch);
-        addNewItemText = "Add a new item";
+        addItemBtn = (Button) findViewById(R.id.addItemButton);
+       // addNewItemText = "Add a new item";
         initList();
         Bundle bundle = getIntent().getExtras();
         listName = bundle.getString("listName");
@@ -58,7 +62,54 @@ public class SearchEngine extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
+        addItemBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                View mView = getLayoutInflater().inflate(R.layout.add_item_prompt,null);
+                mBuilder.setTitle("Add new item");
+                final Spinner mSpinner = (Spinner) mView.findViewById(R.id.spinner);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,
+                        getResources().getStringArray(R.array.types_array));
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mSpinner.setAdapter(adapter);
+                final EditText editItemName = (EditText) mView.findViewById(R.id.item_name);
 
+                mBuilder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(!mSpinner.getSelectedItem().toString().equalsIgnoreCase("Choose a type...")){
+                                type = mSpinner.getSelectedItem().toString();
+                            itemName = editItemName.getText().toString();
+                            if(itemName.isEmpty()){
+                                Log.e("itemName" , "Item name Is empty");
+                            }
+                            Log.e("itemName" , itemName);
+                            if(myTasks.itemExists(itemName) ){
+                                Log.e("exists" , "exists");
+
+                            } else {
+                                myTasks.insertItemOfType(itemName, type);
+                                initList();
+                                Log.e("tagfdsf" , "hey");
+                            }
+                        }
+                        }
+
+                } );
+
+                mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -66,18 +117,18 @@ public class SearchEngine extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
+                alert.setMessage("Add this item?");
 
-
-                if(itemName == addNewItemText){
-                    alert.setMessage("Add a new item");
-                    View mView = getLayoutInflater().inflate(R.layout.add_item_prompt , null);
-                    Spinner spinner = (Spinner) mView.findViewById(R.id.spinner);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.types_array));
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
-                } else{
-                    alert.setMessage("Add this item?");
-                }
+//                if(itemName == addNewItemText){
+//                    alert.setMessage("Add a new item");
+////                    View mView = getLayoutInflater().inflate(R.layout.add_item_prompt , null);
+////                    Spinner spinner = (Spinner) mView.findViewById(R.id.spinner);
+////                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.types_array));
+////                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+////                    spinner.setAdapter(adapter);
+//                } else{
+//                    alert.setMessage("Add this item?");
+//                }
                 //final EditText userInput = (EditText) promptsView.findViewById(R.id.newListName);
 
                 alert
@@ -117,6 +168,8 @@ public class SearchEngine extends AppCompatActivity {
             }
         });
     }
+
+
     public void searchItem(String textToSearch){
         String[] arr = new String[listItems.size()];
         arr = listItems.toArray(arr);
@@ -138,7 +191,7 @@ public class SearchEngine extends AppCompatActivity {
             listItems.add(itemList.get(i).getItemName());
         }
 
-        listItems.add(addNewItemText);
+       // listItems.add(addNewItemText);
 
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
         listView.setAdapter(adapter);
