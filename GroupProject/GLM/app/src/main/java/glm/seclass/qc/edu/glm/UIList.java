@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -132,6 +133,8 @@ public class UIList extends AppCompatActivity {
 
         for(int i = 0; i < listToItem.size(); i++){
 
+
+
             LinearLayout horizontalLL = new LinearLayout(this);
             horizontalLL.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -189,6 +192,7 @@ public class UIList extends AppCompatActivity {
                 }
             });
             horizontalLL.addView(deleteItem);
+
             llList.addView(horizontalLL);
         }
     }
