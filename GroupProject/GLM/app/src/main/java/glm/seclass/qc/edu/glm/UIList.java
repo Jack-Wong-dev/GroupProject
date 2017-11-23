@@ -131,8 +131,13 @@ public class UIList extends AppCompatActivity {
             EditText editTextQuantity = new EditText(this);
             horizontalLL.addView(editTextQuantity);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL);
+
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+
+
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL);
 
             // Button Generated Dynamically
             Button deleteItem = new Button(this);
