@@ -17,6 +17,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.List;
 
 /**
@@ -25,19 +28,15 @@ import java.util.List;
 
 public class UIList extends AppCompatActivity {
 
-    /**
 
-     FloatingActionMenu materialDesignFAM;
+    FloatingActionMenu materialDesignFAM;
     FloatingActionButton addItem;
     FloatingActionButton deleteThisList;
     FloatingActionButton searchForItem;
-     **/
+    FloatingActionButton unCheckAll;
+    FloatingActionButton renameThisList; // @+id/rename_btn
 
 
-    Button addItem;
-    Button deleteThisList;
-    Button searchForItem;
-    Button unCheckAll;
     LinearLayout llList;
     MyTasks myTasks;
     String listName;
@@ -52,13 +51,16 @@ public class UIList extends AppCompatActivity {
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        addItem = findViewById(R.id.add_btn);
-        deleteThisList = findViewById(R.id.delete_btn);
-        unCheckAll = findViewById(R.id.uncheckall);
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        unCheckAll = (FloatingActionButton) findViewById(R.id.uncheckall);
+        addItem = (FloatingActionButton) findViewById(R.id.add_btn);
+        deleteThisList = (FloatingActionButton) findViewById(R.id.delete_btn);
+        searchForItem = (FloatingActionButton) findViewById(R.id.search_btn);
+        title = findViewById(R.id.listname);
         llList = findViewById(R.id.ListLayout);
+
         llList.setFocusable(true);
         llList.setFocusableInTouchMode(true);
-        title = findViewById(R.id.listname);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -90,7 +92,6 @@ public class UIList extends AppCompatActivity {
                 finish();
             }
         });
-        searchForItem = findViewById(R.id.search_btn);
         searchForItem.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -102,7 +103,7 @@ public class UIList extends AppCompatActivity {
         });
     }
 //    displays type view from add button
-    View.OnClickListener displayTypeScreen(final Button button)  {
+    View.OnClickListener displayTypeScreen(final FloatingActionButton button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 Intent showTypeView = new Intent(context, UIType.class);

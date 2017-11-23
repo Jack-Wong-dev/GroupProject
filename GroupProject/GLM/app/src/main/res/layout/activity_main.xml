@@ -8,8 +8,6 @@
     tools:context="glm.seclass.qc.edu.glm.MainActivity">
 
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,7 +32,6 @@
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
         fab:menu_animationDelayPerItem="55"
-        fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
         fab:menu_colorNormal="#da3c2f"
         fab:menu_colorPressed="#dc4b3f"

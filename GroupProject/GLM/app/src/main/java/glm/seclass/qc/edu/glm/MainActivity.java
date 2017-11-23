@@ -110,12 +110,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    public void displaySearchScreen (View view){
-        Intent searchIntent = new Intent(this, SearchEngine.class);
-        startActivityForResult(searchIntent, 1);
-    }
-
 //    Adds listener for new list buttons so that they can display new views
     View.OnClickListener showListView(final Button button)  {
         return new View.OnClickListener() {

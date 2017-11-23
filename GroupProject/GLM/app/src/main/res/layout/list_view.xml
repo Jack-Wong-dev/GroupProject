@@ -13,7 +13,7 @@
         android:text="Dummy List Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-    <Button
+    <com.github.clans.fab.FloatingActionButton
         android:id="@+id/delete_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_alignParentEnd="true"
         android:text="Delete this list" />
 
-    <Button
+    <com.github.clans.fab.FloatingActionButton
         android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 
     </ScrollView>
 
-    <Button
+    <com.github.clans.fab.FloatingActionButton
         android:layout_centerHorizontal="true"
         android:id="@+id/search_btn"
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
         android:layout_alignStart="@+id/listname"
         android:text="SEARCH" />
 
-    <Button
+    <com.github.clans.fab.FloatingActionButton
         android:id="@+id/uncheckall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
