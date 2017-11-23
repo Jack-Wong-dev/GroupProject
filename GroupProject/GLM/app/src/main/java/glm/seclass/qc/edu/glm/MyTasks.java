@@ -57,7 +57,7 @@ public class MyTasks {
         try {
             Void wait = new ItemIsInList().execute(listName,itemName).get();
         } catch (Exception e) {
-            Log.e("Tag", "Error in mytask getLists method");
+            Log.e("Tag", "Error in mytask items is in list method");
         }
         return itemIsInList;
     }
@@ -196,6 +196,46 @@ public class MyTasks {
         }
         catch (Exception e){
             Log.e("tag", "error in deleteItemFromList");
+        }
+    }
+
+    public static void check(ListToItem listToItem){
+        try {
+            Void wait = new Check().execute(listToItem).get();
+        }
+        catch (Exception e){
+
+        }
+    }
+
+    private static int qty;
+    public static int getQty(ListToItem listToItem){
+        try {
+            Void wait = new GetQty().execute(listToItem).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "error in getQTY method");
+        }
+        return qty;
+    }
+
+    private static ItemType getMeasurementVariable;
+    public static String getMeasurement(String itemName){
+        try {
+            Void wait = new GetMeasurement().execute(itemName).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "error in getMeasurement");
+        }
+        return getMeasurementVariable.getMeasurement();
+    }
+
+    public static void setQty(ListToItem listToItem){
+        try {
+            Void wait = new SetQty().execute(listToItem).get();
+        }
+        catch (Exception e){
+            Log.e("tag", "error in setting qty method mytask");
         }
     }
 
@@ -520,7 +560,6 @@ public class MyTasks {
         }
     }
 
-
     private static class DeleteItemFromList extends AsyncTask<String, Void, Void>{
 
         @Override
@@ -531,7 +570,6 @@ public class MyTasks {
             return null;
         }
     }
-////    Tempplate for asyncTask
 
     private static class ItemIsInList extends AsyncTask<String, Void, Void>{
         protected void onPreExecute() {
@@ -572,6 +610,7 @@ public class MyTasks {
         }
 
     }
+
 
     private static class ItemExists extends AsyncTask<String, Void, Void>{
         protected void onPreExecute() {
@@ -634,6 +673,44 @@ public class MyTasks {
         }
 
     }
+
+    private static class Check extends AsyncTask<ListToItem, Void, Void>{
+        @Override
+        protected Void doInBackground(ListToItem... listToItems) {
+            db.listToItemDAO().update(listToItems[0]);
+            return null;
+        }
+    }
+
+    private static class GetQty extends AsyncTask<ListToItem, Void, Void>{
+        @Override
+        protected Void doInBackground(ListToItem... listToItems) {
+            qty = db.listToItemDAO().get(listToItems[0].getListId(),listToItems[0].getItemId()).getQuantity();
+            return null;
+        }
+    }
+
+    private static class GetMeasurement extends AsyncTask<String, Void, Void>{
+        @Override
+        protected Void doInBackground(String ...strings) {
+            Item item = db.itemDAO().getItem((db.itemDAO().getItemId(strings[0])));
+            getMeasurementVariable = db.itemTypeDAO().getItemType(item.getTypeId());
+            return null;
+        }
+    }
+
+    private static class SetQty extends AsyncTask<ListToItem, Void, Void>{
+        @Override
+        protected Void doInBackground(ListToItem ... listToItems) {
+
+            db.listToItemDAO().update(listToItems[0]);
+
+            return null;
+        }
+    }
+
+
+//    Template for asyncTask
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        protected void onPreExecute() {
 //            super.onPreExecute();

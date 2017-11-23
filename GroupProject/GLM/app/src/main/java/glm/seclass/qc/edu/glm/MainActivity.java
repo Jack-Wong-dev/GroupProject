@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//        InitDatabase.destroy(this);
+//        return;
         destroy = findViewById(R.id.destroyDB);
         createList = findViewById(R.id.createList);
         //search = findViewById(R.id.search);
