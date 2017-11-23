@@ -19,7 +19,7 @@ currently stored list, but it will be blank and available to modify.
 
 	**Basic Course of Action:**
 		
-		1. The user clicks the "CREATE LIST" icon on the main screen.
+		1. The user clicks the floating action button "Create List" on the main screen.
 		
 		2. The system prompts the user for a name for the list. 
 		
@@ -68,7 +68,7 @@ currently in existence.
 	
 		1. The user first selects a list. [Use Case 2]
 		
-		2. The user selects the option to rename the list. 
+		2. The user selects the "Rename List" option from the floating action submenu.  
 		
 		3. The system prompts the user to enter a new name for the list. 
 		
@@ -99,7 +99,7 @@ list to be deleted must be the currently selected list.
 	
 		1. The user must first select a list. [Use Case 2]
 		
-		2. The user must select the option to delete the list. 
+		2. The user selects the "Delete List" option from the floating action submenu
 		
 		3. The list is erased from the database. 
 		
@@ -121,7 +121,7 @@ that name in the database for the user to choose from.
 	
 		1. The user selects a list. [Use Case 2]
 		
-		2. The user clicks the "ADD" button. 
+		2. The user clicks selects the "Add Item" option from the floating action submenu. 
 		
 		3. The system displays a list of types to the user. 
 		
@@ -147,7 +147,6 @@ that name in the database for the user to choose from.
 in memory. 
 
 	**Basic Course of Action:** 
-	
 		
 		1. The user highlights the currently entered quantity. 
 		
@@ -169,7 +168,7 @@ in memory.
 	
 		1. The user selects a list [Use Case 2]. 
 		
-		2. The user selects "SEARCH" on the main screen. 
+		2. The user selects the "Search Item" option from the floating action submenu
 		
 		3. The system displays a screen containing a search bar and a list of items currently in the database. 
 		
@@ -204,7 +203,7 @@ modified.
 	
 		1. The user selects a list [Use Case 2]
 		
-		2. The user clicks the "DELETE ITEM" button next to the item to be deleted. 
+		2. The user clicks the "DELETE" button next to the item to be deleted. 
 		
 		3. The system returns to the contents of the selected list; the deleted item is no longer 
 		   present on the list. 
@@ -275,7 +274,7 @@ is checked off.
 	
 		1. The user must first select a list. [Use Case 2]
 		
-		2. The user must then indicate that they would like to clear all checks.   
+		2. The user must selects the "Clear Checks" option from the floating action submenu  
 		
 		3. The system updates the mark accordingly. 
 		
