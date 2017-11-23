@@ -80,6 +80,7 @@
             fab:fab_label="Destroy Database"
             fab:fab_size="mini" />
 
+        <!--
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/search"
             android:layout_width="wrap_content"
@@ -88,7 +89,7 @@
             android:src="@drawable/fab_add"
             fab:fab_label="Search"
             fab:fab_size="mini" />
-
+            -->
     </com.github.clans.fab.FloatingActionMenu>
 
 

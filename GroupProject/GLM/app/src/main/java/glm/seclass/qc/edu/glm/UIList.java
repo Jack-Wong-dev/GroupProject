@@ -2,6 +2,7 @@ package glm.seclass.qc.edu.glm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -16,6 +17,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.List;
 
 /**
@@ -23,6 +27,16 @@ import java.util.List;
  */
 
 public class UIList extends AppCompatActivity {
+
+    /**
+
+     FloatingActionMenu materialDesignFAM;
+    FloatingActionButton addItem;
+    FloatingActionButton deleteThisList;
+    FloatingActionButton searchForItem;
+     **/
+
+
     Button addItem;
     Button deleteThisList;
     Button searchForItem;
@@ -127,7 +141,6 @@ public class UIList extends AppCompatActivity {
             editTextQuantity.getNextFocusUpId();
             editTextQuantity.setImeOptions(EditorInfo.IME_ACTION_DONE);
             editTextQuantity.setText("" +myTasks.getQty(listToItem.get(i)));
-
             final int j = i;
             editTextQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
@@ -141,14 +154,20 @@ public class UIList extends AppCompatActivity {
             });
             horizontalLL.addView(editTextQuantity);
 
-
             TextView textView = new TextView(this);
             Log.e("tag", itemName);
             textView.setText(myTasks.getMeasurement(itemName));
             horizontalLL.addView(textView);
 
+            // Button Generated Dynamically
             Button deleteItem = new Button(this);
-            deleteItem.setText("X");
+            deleteItem.setText("Delete");
+            deleteItem.setTextColor(Color.WHITE);
+            deleteItem.setBackgroundColor(Color.parseColor("#FFC0CB"));
+
+
+
+
             deleteItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
