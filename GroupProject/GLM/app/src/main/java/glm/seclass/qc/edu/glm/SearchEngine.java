@@ -70,21 +70,11 @@ public class SearchEngine extends AppCompatActivity {
 
                 if(itemName == addNewItemText){
                     alert.setMessage("Add a new item");
-                    alert.setView(inflater.inflate(R.layout.add_item_prompt , null));
-                    
-                    Spinner spinner = (Spinner) findViewById(R.id.spinner);
-                    if(spinner == null ){
-                        Log.e("null", "null");
-                    }
-
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
-                            R.array.types_array, R.layout.add_item_prompt);
-
+                    View mView = getLayoutInflater().inflate(R.layout.add_item_prompt , null);
+                    Spinner spinner = (Spinner) mView.findViewById(R.id.spinner);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.types_array));
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
                     spinner.setAdapter(adapter);
-
-
                 } else{
                     alert.setMessage("Add this item?");
                 }
