@@ -124,8 +124,9 @@ public class UIList extends AppCompatActivity {
 
             // Button Generated Dynamically
             Button deleteItem = new Button(this);
-            deleteItem.setText("X");
+            deleteItem.setText("Delete");
             deleteItem.setTextColor(Color.WHITE);
+            deleteItem.setBackgroundColor(Color.parseColor("#FFC0CB"));
 
 
 
