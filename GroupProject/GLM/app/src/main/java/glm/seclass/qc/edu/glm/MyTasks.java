@@ -32,6 +32,17 @@ public class MyTasks {
         new Populate().execute();
     }
 
+    private static boolean itemIsInList;
+    public boolean itemIsInList(String listName , String itemName){
+        try {
+//            String[] s = {itemName, listName};
+            Void wait = new ItemIsInList().execute(listName,itemName).get();
+        } catch (Exception e) {
+            Log.e("Tag", "Error in mytask getLists method");
+        }
+        return itemIsInList;
+    }
+
     private static List<GroceryList> allLists;
 
     public List<GroceryList> getLists() {
@@ -490,6 +501,7 @@ public class MyTasks {
         }
     }
 
+
     private static class DeleteItemFromList extends AsyncTask<String, Void, Void>{
 
         @Override
@@ -501,6 +513,47 @@ public class MyTasks {
         }
     }
 ////    Tempplate for asyncTask
+
+    private static class ItemIsInList extends AsyncTask<String, Void, Void>{
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String listName = strings[0];
+            String itemName = strings[1];
+            try {
+                int itemID = db.itemDAO().getItemId(itemName);
+                GroceryList groceryList = db.groceryListDAO().find(listName);
+                Log.e("ListName" , listName);
+                if(groceryList == null ){
+                    Log.e("null" , "null");
+                }
+                int listID = groceryList.getListId();
+                ListToItem listToItem = db.listToItemDAO().get(listID,itemID);
+                if(listToItem != null ){
+                    itemIsInList = true;
+                } else {
+                    itemIsInList = false;
+                }
+            } catch(Exception e){
+                Log.e("mytask tag" , e.getMessage());
+
+            }
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+    }
+
 //    private static class AnotherAsyncTask extends AsyncTask<String, Void, Void>{
 //        protected void onPreExecute() {
 //            super.onPreExecute();
