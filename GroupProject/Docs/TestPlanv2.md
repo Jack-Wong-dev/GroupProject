@@ -45,8 +45,7 @@ an unexpected error.
 
 ### 1.5 Technology
 
-We plan on using JUnit 4 for our structural tests. Manual testing, and Automation testing using Appium with
-Selenium should be used for functional  tests. 
+We will mainly use manual testing, using black box testing techniques. Unit tests will also be used. 
 
 ## 2 Test Cases
 
