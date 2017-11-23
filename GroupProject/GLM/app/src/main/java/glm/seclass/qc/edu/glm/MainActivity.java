@@ -13,17 +13,25 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button createList;
-    Button search;
-    Button destroy;
+    FloatingActionMenu materialDesignFAM;
+    FloatingActionButton destroy;
+    FloatingActionButton createList;
+    FloatingActionButton search;
+
+
     Context context = this;
     LinearLayout scrollView;
     GLDatabase db;
     MyTasks myTasks;
+
+
 
 
 
@@ -35,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
         destroy = findViewById(R.id.destroyDB);
         createList = findViewById(R.id.createList);
         search = findViewById(R.id.search);
+
+
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        destroy = (FloatingActionButton) findViewById(R.id.destroyDB);
+        createList = (FloatingActionButton) findViewById(R.id.createList);
+        search = (FloatingActionButton) findViewById(R.id.search);
+
+
+
 
         myTasks = new MyTasks(this);
         myTasks.populateDB();
