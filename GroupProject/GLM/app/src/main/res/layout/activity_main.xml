@@ -22,7 +22,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginRight="136dp"
-        android:onClick="displaySearchScreen"
         android:text="Search" />
 
     <Button

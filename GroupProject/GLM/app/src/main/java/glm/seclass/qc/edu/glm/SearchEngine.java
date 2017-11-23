@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class SearchEngine extends AppCompatActivity {
     MyTasks myTasks;
     String listName;
     Context context = this;
+    String addNewItemText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,11 @@ public class SearchEngine extends AppCompatActivity {
         setContentView(R.layout.activity_search_engine);
         listView = (ListView) findViewById(R.id.listview);
         editText = (EditText) findViewById(R.id.txtsearch);
+        addNewItemText = "Add a new item";
         initList();
         Bundle bundle = getIntent().getExtras();
         listName = bundle.getString("listName");
+
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -59,9 +63,31 @@ public class SearchEngine extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final String itemName = (String) listView.getItemAtPosition(position);
-
+                LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                alert.setMessage("Add this item?");
+
+
+
+                if(itemName == addNewItemText){
+                    alert.setMessage("Add a new item");
+                    alert.setView(inflater.inflate(R.layout.add_item_prompt , null));
+                    
+                    Spinner spinner = (Spinner) findViewById(R.id.spinner);
+                    if(spinner == null ){
+                        Log.e("null", "null");
+                    }
+
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
+                            R.array.types_array, R.layout.add_item_prompt);
+
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    spinner.setAdapter(adapter);
+
+
+                } else{
+                    alert.setMessage("Add this item?");
+                }
                 //final EditText userInput = (EditText) promptsView.findViewById(R.id.newListName);
 
                 alert
@@ -71,7 +97,7 @@ public class SearchEngine extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
-                                        if(myTasks.itemIsInList(listName , itemName)){
+                                         if(myTasks.itemIsInList(listName , itemName)){
                                             CharSequence text = "That Item already exists!";
                                             Log.e("SearchEngine" , "This item already exists");
                                             int duration = Toast.LENGTH_SHORT;
@@ -121,6 +147,8 @@ public class SearchEngine extends AppCompatActivity {
         for(int i = 0; i < itemList.size() ; i++ ){
             listItems.add(itemList.get(i).getItemName());
         }
+
+        listItems.add(addNewItemText);
 
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
         listView.setAdapter(adapter);
