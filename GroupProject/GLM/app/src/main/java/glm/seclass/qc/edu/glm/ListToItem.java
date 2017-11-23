@@ -26,6 +26,13 @@ public class ListToItem {
     @ColumnInfo(name = "item_id")
     private int itemId;
 
+//    @ColumnInfo(name = "checked_off")
+//    private Boolean checkedOff;
+
+//    public ListToItem(){
+//        checkedOff = false;
+//    }
+
     public int getListId() {
         return listId;
     }
