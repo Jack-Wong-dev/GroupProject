@@ -50,21 +50,20 @@ Selenium should be used for functional  tests.
 
 ## 2 Test Cases
 
-| ﻿test cases                 | purpose                                        | steps                                                                                              | expected result | actual result |
-|----------------------------|------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------------|---------------|
-| create a list              | To see if users can create a list              | click on create a list                                                                             |                 |               |
-| |    |                                |                 |               |
-| select a list              | To see if users can select a list              | tap on a list                                                                                      |                 |               |
-| rename a list              | To see if users can rename a list              | tap on a list, then tap rename                                                                     |                 |               |
-| delete a list              | To see if users can delete a list              | tap on a list, then tap delete                                                                     |                 |               |
-| search for an item by type | To see if users can search for an item by type | click on text field for item search, enter in an item, and click on search                         |                 |               |
-| add item to list           | To see if users can add items to a list        | tap on a list, tap on add, enter in item, and click add                                            |                 |               |
-| change item quantity       | To see if users can change item quality        | tap on a click, tap on change quality, enter quality, then tap change quality                      |                 |               |
-| search for item by query   | To see if users can search for a item by query | select an item from list by tapping, tap add item to list, then tap search for item by query       |                 |               |
-| select item from list      | To see if users can select item from list      | tap on a list, then tap on an item from list                                                       |                 |               |
-| delete item                | To see if users can delete itemm               | tap on a list, tap on an item, then tap on delete                                                  |                 |               |
-| add new item to database   | To see if users can add new items to database  | tap on a list, tap on add item, search item by query, enter item not in database, and add new item |                 |               |
-| check off specific item    | To see if users can check off specific items   | tap on list, tap on item, tap on checkbox                                                          |                 |               |
-| clear all checks           | To see if users can clear all checks           | tap on list, tap on clear all checks                                                               |                 |               |
-| check off all              | To see if users can check off all              | tap on lists, tap on check off all                                                                 |                 |               |
-
+| ﻿test cases                 | purpose                                        | steps                                                                                              | actual result                    |
+|----------------------------|------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------|
+| create a list              | To see if users can create a list              | click on create a list                                                                             | works as expected                |
+| search for a list          | To see if users can search for a list          | click on text field for list search, type in a list, and hit search                                | this feature was not implemented |
+| select a list              | To see if users can select a list              | tap on a list                                                                                      | this works as expected           |
+| rename a list              | To see if users can rename a list              | tap on a list, then tap rename                                                                     | this works as expected           |
+| delete a list              | To see if users can delete a list              | tap on a list, then tap delete                                                                     | this works as expected           |
+| search for an item by type | To see if users can search for an item by type | click on text field for item search, enter in an item, and click on search                         | this works as expected           |
+| add item to list           | To see if users can add items to a list        | tap on a list, tap on add, enter in item, and click add                                            | this works as expected           |
+| change item quantity       | To see if users can change item quality        | tap on a click, tap on change quality, enter quality, then tap change quality                      | this works as expected           |
+| search for item by query   | To see if users can search for a item by query | select an item from list by tapping, tap add item to list, then tap search for item by query       | this works as expected           |
+| select item from list      | To see if users can select item from list      | tap on a list, then tap on an item from list                                                       | this works as expected           |
+| delete item                | To see if users can delete itemm               | tap on a list, tap on an item, then tap on delete                                                  | this works as expected           |
+| add new item to database   | To see if users can add new items to database  | tap on a list, tap on add item, search item by query, enter item not in database, and add new item | this works as expected           |
+| check off specific item    | To see if users can check off specific items   | tap on list, tap on item, tap on checkbox                                                          | this works as expected           |
+| clear all checks           | To see if users can clear all checks           | tap on list, tap on clear all checks                                                               | this works as expected           |
+| check off all              | To see if users can check off all              | tap on lists, tap on check off all                                                                 | this feature was not implemented |
