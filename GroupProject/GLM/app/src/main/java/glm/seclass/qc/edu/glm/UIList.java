@@ -2,6 +2,7 @@ package glm.seclass.qc.edu.glm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.List;
 
 /**
@@ -18,6 +22,16 @@ import java.util.List;
  */
 
 public class UIList extends AppCompatActivity {
+
+    /**
+
+     FloatingActionMenu materialDesignFAM;
+    FloatingActionButton addItem;
+    FloatingActionButton deleteThisList;
+    FloatingActionButton searchForItem;
+     **/
+
+
     Button addItem;
     Button deleteThisList;
     Button searchForItem;
@@ -108,8 +122,14 @@ public class UIList extends AppCompatActivity {
             EditText editTextQuantity = new EditText(this);
             horizontalLL.addView(editTextQuantity);
 
+            // Button Generated Dynamically
             Button deleteItem = new Button(this);
             deleteItem.setText("X");
+            deleteItem.setTextColor(Color.WHITE);
+
+
+
+
             deleteItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
