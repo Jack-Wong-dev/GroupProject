@@ -11,7 +11,7 @@ The software GroceryListManager was sponsored by Brad and Janet; the purpose of 
 
 With regard to the software, we assume that there is enough space on the device carrying the application for it to be stored and run without issue. We also assume that each user of the application will have their own particular set of grocery lists; rather than having a log-in, the installation of the application will allow the user to have a space exclusive to the user for him or her to produce their own grocery lists. 
 
-The software has no dependencies thus far, but must operate on environments that are at least API Level 21. 
+The software has no dependencies thus far, but must operate on environments that are at least API Level 21. The software utilizes the Room persistence library to facilitate the database. 
 
 
 ### 1.2 Constraints
@@ -20,23 +20,18 @@ One of the requirements of provided states that the users must be able to add it
 
 ### 1.3 System Environment
 
-As stated above, the system must be able to operate on phones that are at least API Level 21, which corresponds to Android 5.0. An example device that runs Android 5.0 would be the Nexus 6, which features a resolution of 2560x1440 pixels and 3GM of RAM. 
+As stated above, the system must be able to operate on phones that are at least API Level 21, which corresponds to Android 5.0. An example device that runs Android 5.0 would be the Nexus 6, which features a 2.7 GHz quad-core processor and 3GM of RAM. Picture-wise, the phone display is 5.96 inches; it has a resolution of 2560 x 1440 pixels. 
 
 ## 2 Architectural Design
 
 
 ### 2.1 Component Diagram
 
-![Component Diagram](images/componentDiagram.png)
+![Component Diagram](images/componentDiagramv3.png)
 
-#### Relationships between components
-	- This diagram depicts the relationship between the components of the Grocery Manager List
-	- The user component has access to the interface of the listClass component by having the ability to create lists
-	- The user component also has access to the interface of the database component by means of adding items to the database when they do not exist.
-	- The list class has access to the database so that it can add items to the list
-	- The list class also has access to the itemType component so the user can browse for items by type
-	- The itemType component has access to the itemNode component so it can offer the user items sorted by types
-	- The database component has access to the itemNode component so it can create the items. 
+**Relationships between components**
+
+The diagram above depicts the relationship between various components of the Grocery List Manager application. The ItemNode component relates to the ItemType component in that ItemType provide information about the item's type, through the variable itemType, to the item. The ItemNode component provides information about the item's name, and the item's quantity, through itemName and itemCount respectively. We group both ItemNode and ItemType together because combined they provide the full item description with regard to an instance of an item; this information is provided to the component GroceryList. All of these components must interact with the database; the database component provides information through the Room persistence library which in turn utilizes SQLite to return data such as the list's name, and currently stored item names and types. 
 
 ### 2.2 Deployment Diagram
 
@@ -47,7 +42,7 @@ A diagram displaying where the components would be deployed is unreasonable beca
 
 ### 3.1 Class Diagram
 
-![Design-Team](images/design-team.png)
+![Design-Team](images/design-teamv4.png)
 
 
 ## 4 User Interface Diagram
