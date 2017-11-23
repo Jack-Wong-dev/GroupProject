@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setView(promptsView);
                 final EditText userInput = (EditText) promptsView.findViewById(R.id.newListName);
+                userInput.clearFocus();
+                userInput.setSingleLine(true);
 
                 alert
                         .setCancelable(false)
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         String userText = userInput.getText().toString();
 
                                         if(myTasks.findExistingList(userText)){
