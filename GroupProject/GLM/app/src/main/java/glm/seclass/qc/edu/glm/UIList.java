@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -21,20 +24,24 @@ import java.util.List;
  * Created by Lin on 11/21/17.
  */
 
+
+
 public class UIList extends AppCompatActivity {
 
-    /**
+
+
+
 
      FloatingActionMenu materialDesignFAM;
     FloatingActionButton addItem;
     FloatingActionButton deleteThisList;
     FloatingActionButton searchForItem;
-     **/
 
 
-    Button addItem;
-    Button deleteThisList;
-    Button searchForItem;
+
+//    Button addItem;
+//    Button deleteThisList;
+//    Button searchForItem;
     LinearLayout llList;
     MyTasks myTasks;
     String listName;
@@ -46,8 +53,10 @@ public class UIList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
 
-        addItem = findViewById(R.id.add_btn);
-        deleteThisList = findViewById(R.id.delete_btn);
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+
+        addItem = (FloatingActionButton) findViewById(R.id.add_btn);
+        deleteThisList = (FloatingActionButton) findViewById(R.id.delete_btn);
         llList = findViewById(R.id.ListLayout);
         title = findViewById(R.id.listname);
 
@@ -79,7 +88,7 @@ public class UIList extends AppCompatActivity {
         });
     }
 //    displays type view from add button
-    View.OnClickListener displayTypeScreen(final Button button)  {
+    View.OnClickListener displayTypeScreen(final FloatingActionButton button)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 Intent showTypeView = new Intent(context, UIType.class);
@@ -122,13 +131,15 @@ public class UIList extends AppCompatActivity {
             EditText editTextQuantity = new EditText(this);
             horizontalLL.addView(editTextQuantity);
 
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL);
+
             // Button Generated Dynamically
             Button deleteItem = new Button(this);
             deleteItem.setText("Delete");
             deleteItem.setTextColor(Color.WHITE);
             deleteItem.setBackgroundColor(Color.parseColor("#FFC0CB"));
-
-
+            deleteItem.setLayoutParams(params);
 
 
             deleteItem.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +150,9 @@ public class UIList extends AppCompatActivity {
                 }
             });
             horizontalLL.addView(deleteItem);
+
             llList.addView(horizontalLL);
+
         }
     }
 }
